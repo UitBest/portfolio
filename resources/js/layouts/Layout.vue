@@ -1,112 +1,110 @@
 <template>
     <v-app>
-        <v-fade-transition>
-            <v-app-bar
-                v-show="showAppBar"
-                color="navbar"
-                density="comfortable"
-                style="z-index: 50"
-            >
-                <v-sheet
-                    class="mx-auto w-100 h-100 py-2 align-center d-flex"
-                    :class="mobile && 'px-4'"
-                    color="transparent"
-                    max-width="64rem"
+        <v-card>
+            <v-layout>
+                <v-navigation-drawer
+                    color="black"
+                    expand-on-hover
+                    :rail="showRail"
                 >
-                    <v-btn
-                        v-for="(item, key) in navBarItems"
-                        :key="key"
-                        class="mr-1"
-                        height="100%"
-                        :icon="mobile"
-                    >
-                        <v-tooltip v-if="mobile" activator="parent" location="bottom">
-                            <div>{{ item.name }}</div>
-                        </v-tooltip>
+                    <v-list>
+                        <v-list-item
+                            prepend-avatar="img/UitBestLogo.png"
+                            subtitle="timo@uit.best"
+                            title="Timo Cuijpers"
+                        />
+                    </v-list>
 
-                        <v-icon v-show="mobile" :icon="item.icon" />
+                    <v-divider></v-divider>
 
-                        <span v-show="! mobile">{{ item.name }}</span>
-                        <template v-if="! mobile" v-slot:prepend>
-                            <v-icon :icon="item.icon" />
-                        </template>
-                    </v-btn>
-                </v-sheet>
-            </v-app-bar>
-        </v-fade-transition>
+                    <v-list density="compact" nav>
+                        <v-list-item
+                            v-for="(item, key) in defaultRoutes"
+                            :key="key"
+                            :prepend-icon="item.icon"
+                            :title="item.name"
+                            :to="item.to"
+                        />
+                        <v-list-group fluid>
+                            <template v-slot:activator="{ props, isOpen }">
+                                <v-list-item
+                                    :active="route.path === '/websites' || isOpen"
+                                    density="compact"
+                                    prepend-icon="mdi-web"
+                                    title="Websites"
+                                    :to="{ name: 'Websites' }"
+                                >
+                                    <template v-slot:append>
+                                        <v-btn
+                                            v-bind="props"
+                                            color="white"
+                                            density="comfortable"
+                                            :icon="isOpen ? 'mdi-minus' : 'mdi-chevron-down'"
+                                            size="small"
+                                            variant="tonal"
+                                            @click.stop.prevent
+                                        />
+                                    </template>
+                                </v-list-item>
+                            </template>
+                            <v-list-item
+                                v-for="(item, key) in websites"
+                                :key="key"
+                                :prepend-icon="item.icon"
+                                :title="item.name"
+                                :to="item.to"
+                                :value="item.name"
+                            />
+                        </v-list-group>
+                    </v-list>
+                </v-navigation-drawer>
 
-        <v-main>
-            <v-sheet
-                ref="content"
-                class="mx-auto my-4 px-4 py-2"
-                elevation="10"
-                max-width="64rem"
-                min-height="90svh"
-                rounded="xl"
-            >
-                <router-view />
-            </v-sheet>
-        </v-main>
+                <v-main style="min-height: 100svh">
+                    <router-view />
+                </v-main>
+            </v-layout>
+        </v-card>
     </v-app>
 </template>
 
 <script setup>
-    import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
-    import { useDisplay } from 'vuetify';
-    import { useRoute } from 'vue-router';
+    import { useRoute, useRouter } from 'vue-router';
+    import { onMounted, ref, watch } from 'vue';
 
     const route = useRoute();
+    const router = useRouter();
 
-    const navBarItems = [
+    const showRail = ref(false);
+
+    const showWebsites = ref(false);
+    const websites = ref([]);
+
+    const defaultRoutes = [
         {
             icon: 'mdi-home',
             name: 'Home',
-            to: { name: 'Home' },
+            to: '/home',
         },
         {
-            icon: 'mdi-toolbox',
-            name: 'Producten',
-        },
-        {
-            icon: 'mdi-account-wrench',
-            name: 'Service',
-        },
-        {
-            icon: 'mdi-email',
-            name: 'Contact',
+            icon: 'mdi-office-building',
+            name: 'Uit Best',
+            to: '/uit-best',
         },
     ];
 
-    const content = ref(null);
-    const showAppBar = ref(true);
-    let lastScrollPosition = 0;
-    let lastAppBarPosition = 0;
-
-    const display = useDisplay();
-    const mobile = computed(() => route.meta.mobile.value);
-
-    watch(
-        display.smAndDown,
-        (value) => {
-            route.meta.mobile.value = value;
-        },
-    );
-
-    const handleScroll = () => {
-        const currentScrollPosition = window.scrollY || document.documentElement.scrollTop;
-
-        if (currentScrollPosition > lastScrollPosition) {
-            if (currentScrollPosition > lastAppBarPosition + 300) {
-                showAppBar.value = false;
-            }
-        } else {
-            showAppBar.value = true;
-            lastAppBarPosition = currentScrollPosition;
+    watch(route, (newRoute) => {
+        if (newRoute.path === '/websites') {
+            showWebsites.value = true;
         }
+    });
 
-        lastScrollPosition = currentScrollPosition;
-    };
+    onMounted(() => {
+        const websitesRoute = _.find(router.options.routes[0].children, (route) => route.name === 'Websites');
 
-    onMounted(() => window.addEventListener('scroll', handleScroll));
-    onUnmounted(() => window.removeEventListener('scroll', handleScroll));
+        websitesRoute.children.forEach((website) => {
+            if (website.meta?.sidebar) {
+                websites.value.push(website.meta.sidebar);
+            }
+        });
+    });
 </script>
