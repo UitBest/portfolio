@@ -9,7 +9,7 @@
         rounded="xl"
     >
         <h1>
-            Home, I'm comming home. Home is where ever I'm with you.
+            Home, I'm coming home. Home is where ever I'm with you.
         </h1>
     </v-sheet>
 

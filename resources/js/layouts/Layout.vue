@@ -3,16 +3,28 @@
         <v-card>
             <v-layout>
                 <v-navigation-drawer
+                    border="r"
                     color="black"
                     expand-on-hover
-                    :rail="showRail"
+                    :rail="! pinned"
                 >
                     <v-list>
                         <v-list-item
                             prepend-avatar="img/UitBestLogo.png"
                             subtitle="timo@uit.best"
                             title="Timo Cuijpers"
-                        />
+                        >
+                            <template v-slot:append>
+                                <v-btn
+                                    class="align-self-end"
+                                    density="comfortable"
+                                    :icon="(pinned ? 'mdi-pin' : 'mdi-pin-outline') + ' mdi-rotate-45'"
+                                    size="small"
+                                    variant="text"
+                                    @click="pinned = ! pinned"
+                                />
+                            </template>
+                        </v-list-item>
                     </v-list>
 
                     <v-divider></v-divider>
@@ -74,7 +86,7 @@
     const route = useRoute();
     const router = useRouter();
 
-    const showRail = ref(false);
+    const pinned = ref(false);
 
     const showWebsites = ref(false);
     const websites = ref([]);

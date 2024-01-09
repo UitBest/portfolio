@@ -13,7 +13,7 @@
     @vite('resources/css/app.css')
 
     {{--  Title  --}}
-    <title>Laravel Vue Template</title>
+    <title>Timo Cuijpers</title>
 
 </head>
 <body>

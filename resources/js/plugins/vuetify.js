@@ -6,10 +6,18 @@ import { md3 } from 'vuetify/blueprints';
 
 const light = {
     dark: false,
-    // colors: {
-    //     primary: '',
-    //     secondary: '',
-    // },
+    colors: {
+        primary: '#62f4ff',
+        secondary: '#02406f',
+        background: '#04244d',
+        'text-lighter': 'rgba(2,64,111,0.73)',
+    },
+    /*  Van logo:
+    *   Icon color: #62f4ff
+    *   Text color: #ffffff
+    *   Bg color: #02406f
+    *   Text bg color: #04244d
+    */
 };
 
 const dark = {
