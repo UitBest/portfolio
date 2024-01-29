@@ -9,7 +9,7 @@ const light = {
     colors: {
         primary: '#62F7FE',
         secondary: '#090088',
-        background: '#062B4D',
+        background: '#10124B',
         dark: '#03002e',
         'text-lighter': 'rgba(2,64,111,0.73)',
     },

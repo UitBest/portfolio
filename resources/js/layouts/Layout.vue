@@ -2,12 +2,13 @@
     <v-app>
         <v-navigation-drawer
             :class="pinned && ! mobile ? '' : 'rounded-lg ma-2'"
-            :color="pinned && ! mobile ? 'dark' : 'background'"
-            elevation="20"
+            color="transparent"
+            elevation="24"
             :expand-on-hover="! mobile"
             permanent
             :rail="! pinned"
             :sticky="! pinned || mobile"
+            style="backdrop-filter: blur(20px)"
         >
             <v-list>
                 <v-list-item
@@ -20,7 +21,7 @@
                             class="text-white cursor-pointer"
                             icon="mdi-menu"
                             size="small"
-                            @click="pinned = true"
+                            @click.stop.prevent="pinned = true"
                         />
                         <v-avatar
                             v-else
@@ -36,7 +37,7 @@
                             :icon="mobile ? 'mdi-close' : (pinned ? 'mdi-pin' : 'mdi-pin-outline') + ' mdi-rotate-45'"
                             size="36"
                             variant="text"
-                            @click="mobile ? pinned = false : pinned = ! pinned"
+                            @click.stop.prevent="mobile ? pinned = false : pinned = ! pinned"
                         />
                     </template>
                 </v-list-item>
@@ -91,7 +92,7 @@
         <v-main :class="pinned && ! mobile ? '' : 'px-0'" style="min-height: 100svh;">
             <router-view />
 
-            <v-footer color="dark">
+            <v-footer v-if="! route.path === '/websites'" color="dark">
                 <Footer />
             </v-footer>
         </v-main>

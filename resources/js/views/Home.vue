@@ -9,31 +9,45 @@
                     width="300"
                 />
             </v-sheet>
-            <v-expansion-panels :class="! mobile && 'align-self-center'">
-                <v-expansion-panel
-                    bg-color="dark"
-                    color="dark"
-                    max-width="600"
-                    prepend-avatar="/img/Timo.jpeg"
-                    subtitle="Webdeveloper"
-                    title="Timo Cuijpers"
-                    :value="mobile"
-                >
-                    <template v-slot:text>
-                        <span class="text-caption text-primary">BIO</span><br>
-                        <span>Sommige herkennen mij als "die lange", maar jij mag me Timo noemen.</span><br><br>
-                        <span>Ik woon nu al 19 jaar in Best en ik moet zeggen, het is de Bestse tijd van mijn leven geweest. Misschien wel logisch als ik 19 ben...</span><br><br>
-                        <v-divider /><br>
-                        <span class="text-caption text-primary">STUDIE</span><br>
-                        <span>In 2021 ging ik van vmbo-t naar het Summa College in Eindhoven. Oorspronkelijk deed ik de opleiding Expert IT, maar ik kwam er na een half jaar achter dat ik bijna alleen maar bezig was met programmeren. Zonder overweging ben ik naar de opleiding 'Software Developer' overgestapt en ik was direct in het versneld traject beland.</span><br><br>
-                        <span>Met trots kan ik zeggen dat ik voor mijn programmeer examen een 9,7 heb gehaald en voor het onderdeel 'samenwerken' een 10. Wel jammer dat ik de andere 0,3 ben vergeten te halen...</span><br><br>
-                        <v-divider /><br>
-                        <span class="text-caption text-primary">NU</span><br>
-                        <span>Nadat ik de opleiding een jaar heb ingekort en een super informatieve stage heb gehad, besloot ik mijn eigen bedrijf, 'Uit Best', te starten in een kamer van mijn <a class="text-white" href="https://www.dieder.it/">vaders kantoor.</a></span><br><br>
-                        <span>Ik ben super blij en dankbaar dat mijn vader mij deze kans geeft om te groeien en dat hij mij advies kan geven in ondernemen.</span>
-                    </template>
-                </v-expansion-panel>
-            </v-expansion-panels>
+            <!--            <v-expansion-panels :class="! mobile && 'align-self-center'">-->
+            <v-card
+                color="transparent"
+                elevation="24"
+                max-width="600"
+                prepend-avatar="/img/Timo.jpeg"
+                style="backdrop-filter: blur(20px)"
+                subtitle="Webdeveloper"
+                title="Timo Cuijpers"
+                :value="mobile"
+            >
+                <v-card-text class="pb-0">
+                    <span class="text-caption text-primary">BIO</span><br>
+                    <span>Sommige herkennen mij als "die lange", maar jij mag me Timo noemen.</span><br><br>
+                    <span>Ik woon nu al 19 jaar in Best en ik moet zeggen, het is de Bestse tijd van mijn leven geweest. Misschien wel logisch als ik 19 ben...</span>
+                    <v-expand-transition>
+                        <v-sheet v-show="showExtraIntroInfo">
+                            <br><br>
+                            <v-divider /><br>
+                            <span class="text-caption text-primary">STUDIE</span><br>
+                            <span>In 2021 ging ik van vmbo-t naar het Summa College in Eindhoven. Oorspronkelijk deed ik de opleiding Expert IT, maar ik kwam er na een half jaar achter dat ik bijna alleen maar bezig was met programmeren. Zonder overweging ben ik naar de opleiding 'Software Developer' overgestapt en ik was direct in het versneld traject beland.</span><br><br>
+                            <span>Met trots kan ik zeggen dat ik voor mijn programmeer examen een 9,7 heb gehaald en voor het onderdeel 'samenwerken' een 10. Wel jammer dat ik de andere 0,3 ben vergeten te halen...</span><br><br>
+                            <v-divider /><br>
+                            <span class="text-caption text-primary">NU</span><br>
+                            <span>Nadat ik de opleiding een jaar heb ingekort en een super informatieve stage heb gehad, besloot ik mijn eigen bedrijf, 'Uit Best', te starten in een kamer van mijn <a class="text-white" href="https://www.dieder.it/">vaders kantoor.</a></span><br><br>
+                            <span>Ik ben super blij en dankbaar dat mijn vader mij deze kans geeft om te groeien en dat hij mij advies kan geven in ondernemen.</span>
+                        </v-sheet>
+                    </v-expand-transition>
+                </v-card-text>
+
+                <v-card-actions class="justify-center">
+                    <v-btn
+                        :icon="(showExtraIntroInfo ? 'mdi-rotate-180' : '') + ' mdi-chevron-down'"
+                        variant="text"
+                        @click="showExtraIntroInfo = ! showExtraIntroInfo"
+                    />
+                </v-card-actions>
+
+            </v-card>
         </v-sheet>
     </v-parallax>
     <v-sheet
@@ -99,6 +113,7 @@
                 </v-card-text>
             </v-card>
         </v-sheet>
+
     </v-sheet>
     <v-parallax
         src="/img/ProgrammingBackground.jpeg"
@@ -109,10 +124,12 @@
 </template>
 
 <script setup>
-    import { computed } from 'vue';
+    import { computed, ref } from 'vue';
     import { useDisplay } from 'vuetify';
 
     const display = useDisplay();
     const mobile = computed(() => display.smAndDown.value);
+
+    const showExtraIntroInfo = ref(false);
 
 </script>
