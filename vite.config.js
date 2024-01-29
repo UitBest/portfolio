@@ -4,7 +4,7 @@ import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
     server: {
-        host: 'localhost',
+        host: true,
         port: '83',
         https: process.env.NODE_ENV === 'production',
     },

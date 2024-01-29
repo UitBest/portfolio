@@ -1,5 +1,4 @@
 import { createWebHistory, createRouter } from 'vue-router';
-import { ref } from 'vue';
 
 const routes = [
     {
@@ -7,9 +6,6 @@ const routes = [
         name: 'Layout',
         component: () => import('@/layouts/Layout.vue'),
         redirect: { name: 'Home' },
-        meta: {
-            mobile: ref(false),
-        },
         children: [
             {
                 path: 'home',
