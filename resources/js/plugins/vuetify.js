@@ -15,6 +15,7 @@ const light = {
     },
     /*
     Logo:
+        #710193
         #031F4F
         #01406D
         #04B4DD

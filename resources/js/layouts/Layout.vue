@@ -16,11 +16,13 @@
                     title="Timo Cuijpers"
                 >
                     <template v-slot:prepend>
-                        <v-avatar
+                        <v-btn
                             v-if="mobile && ! pinned"
                             class="text-white cursor-pointer"
+                            color="white"
+                            density="compact"
                             icon="mdi-menu"
-                            size="small"
+                            variant="text"
                             @click.stop.prevent="pinned = true"
                         />
                         <v-avatar
@@ -32,12 +34,13 @@
                     </template>
                     <template v-slot:append>
                         <v-btn
+                            v-show="pinned"
                             class="align-self-end"
                             color="white"
                             :icon="mobile ? 'mdi-close' : (pinned ? 'mdi-pin' : 'mdi-pin-outline') + ' mdi-rotate-45'"
                             size="36"
                             variant="text"
-                            @click.stop.prevent="mobile ? pinned = false : pinned = ! pinned"
+                            @click="mobile ? pinned = false : pinned = ! pinned"
                         />
                     </template>
                 </v-list-item>
@@ -92,7 +95,7 @@
         <v-main :class="pinned && ! mobile ? '' : 'px-0'" style="min-height: 100svh;">
             <router-view />
 
-            <v-footer v-if="! route.path === '/websites'" color="dark">
+            <v-footer color="dark">
                 <Footer />
             </v-footer>
         </v-main>

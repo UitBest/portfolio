@@ -1,5 +1,5 @@
 <template>
-    <v-container fluid>
+    <v-container :class="mobile ? 'pa-4' : 'pa-10'" fluid>
         <v-row>
             <v-col cols="12" md="4">
                 <v-sheet height="50">
@@ -23,10 +23,16 @@
                 </div>
             </v-col>
             <v-spacer/>
-            <v-divider :vertical="! mobile" />
+            <v-divider
+                :class="mobile && 'mb-10'"
+                :vertical="! mobile"
+            />
             <v-spacer/>
             <v-col cols="12" md="4">
-                <v-sheet class="d-flex justify-center" height="50">
+                <v-sheet
+                    class="d-flex justify-center"
+                    height="50"
+                >
 
                     <v-btn-group
                         color="primary"
@@ -59,7 +65,7 @@
                         />
                     </v-btn-group>
                 </v-sheet>
-                <div class="text-body-1 mt-4 text-primary" :class="mobile ? 'text-center' : ''">Timo Cuijpers</div>
+                <div class="text-body-1 mt-4 text-primary" :class="mobile && 'text-center'">Timo Cuijpers</div>
                 <v-divider class="mb-2 mt-1"/>
                 <div class="text-body-2 d-flex justify-space-between">
                     <div>
@@ -67,12 +73,15 @@
                         E-mail:<br>
                     </div>
                     <div class="text-end">
-                        0612345678<br>
-                        timo@uit.best<br>
+                        +31 6 24 19 68 43<br>
+                        <span><a class="text-white text-decoration-none" href="mailto:timo@uit.best">timo@uit.best</a></span><br>
                     </div>
                 </div>
             </v-col>
-            <v-divider :vertical="! mobile" />
+            <v-divider
+                :class="mobile && 'mb-10'"
+                :vertical="! mobile"
+            />
             <v-col cols="12" md="4">
                 <v-sheet height="50">
                     <div class="text-h6 text-center text-primary">Pagina's</div>
@@ -81,18 +90,17 @@
                 <v-divider class="mb-2 mt-1"/>
                 <div class="text-body-2 d-flex justify-space-between">
                     <div>
-                        <a class="text-white" href="#">Home</a><br>
-                        <a class="text-white" href="#">Uit Best</a><br>
-                        <a class="text-white" href="#">Home</a><br>
+                        <a class="text-white" href="/home">Home</a><br>
+                        <a class="text-white" href="/uit-best">Uit Best</a><br>
+                        <a class="text-white" href="/websites">Websites</a><br>
                     </div>
                     <div class="text-end">
-                        <a class="text-white" href="#">4 Torentjes</a><br>
-                        <a class="text-white" href="#">Beauty Education</a><br>
-                        <a class="text-white" href="#">MAJO Diensten</a><br>
+                        <a class="text-white" href="/websites/4torentjes">4 Torentjes</a><br>
+                        <a class="text-white" href="/websites/beauty-education">Beauty Education</a><br>
+                        <a class="text-white" href="/websites/majo-diensten">MAJO Diensten</a><br>
                     </div>
                 </div>
             </v-col>
-            <v-divider v-if="mobile" />
         </v-row>
     </v-container>
 </template>

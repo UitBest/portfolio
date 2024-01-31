@@ -1,17 +1,17 @@
 <template>
     <v-parallax
         v-if="route.meta.isRoot"
-        :src="mobile ? '/img/WebsitesBackgroundPortrait.png' : '/img/WebsitesBackground.png'"
+        src="/img/WebsitesBackground.jpg"
     >
         <v-sheet>
             <div class="text-h2 py-16 text-center">Websites</div>
         </v-sheet>
-        <v-divider class="mx-auto mb-10" inset />
+        <v-divider class="mx-auto" inset />
         <v-sheet class="d-flex flex-wrap">
             <v-sheet
                 v-for="site in sites"
                 :key="site.name"
-                class="pa-10"
+                :class="mobile ? 'px-4 py-16' : 'pa-16'"
                 :width="mobile ? '100%' : '50%'"
             >
                 <v-card
@@ -23,7 +23,13 @@
                     :to="{ name: site.name }"
                 >
                     <v-card-text>
-                        <v-img class="rounded-lg mb-4" :src="site.imgUrl" />
+                        <v-img
+                            aspect-ratio="1.3"
+                            class="rounded-lg my-4 elevation-24"
+                            cover
+                            position="top"
+                            :src="site.imgUrl"
+                        />
                         <v-sheet class="d-flex flex-row">
                             <v-sheet class="pr-4 d-flex flex-column" width="50%">
                                 <v-sheet class="align-self-baseline">
@@ -95,28 +101,28 @@
             name: '4 Torentjes',
             url: 'https://www.4torentjes.nl',
             loaded: ref(false),
-            description: '4 Torentjes is een website voor het huisje van mijn grootouders in Portugal.',
+            description: 'De website 4 Torentjes dient als online presentatie voor een huis in Portugal, eigendom van mijn grootvader.',
             duration: '16 uur (zonder design i.v.m. gebruik origineel design)',
             when: 'Eind 2023',
-            imgUrl: '/img/4torentjes.jpeg',
+            imgUrl: '/img/4TorentjesCutOut.png',
         },
         {
             name: 'Beauty Education',
             url: 'https://www.beautyeducation.nl',
             loaded: ref(false),
-            description: 'Beauty Education is een website voor de zus van mijn tante die cursussen / makeovers geeft.',
+            description: 'Beauty Education is een website ontworpen voor een professioneel die cursussen en makeovers verzorgt, gerelateerd aan mijn familie.',
             duration: '90 uur per persoon (3 personen)',
             when: 'Eind 2022 - Midden 2023',
-            imgUrl: '/img/beautyeducation.jpeg',
+            imgUrl: '/img/BeautyEducationCutOut.png',
         },
         {
             name: 'MAJO Diensten',
             url: 'https://www.majodiensten.nl',
             loaded: ref(false),
-            description: 'MAJO diensten is een website voor de moeder van mijn tante die schoonmaakdiensten aanbiedt.',
+            description: 'MAJODiensten.nl biedt informatie over schoonmaakdiensten, opgezet voor een familielid',
             duration: '18 uur',
             when: 'Midden 2023',
-            imgUrl: '/img/majodiensten.jpeg',
+            imgUrl: '/img/MAJODienstenCutOut.png',
         },
     ];
 </script>
