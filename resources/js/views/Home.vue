@@ -17,10 +17,9 @@
                 </div>
 
                 <v-btn
+                    v-if="arrowDownHint"
                     class="mt-16 arrowDownHint"
                     icon="mdi-arrow-down"
-                    location="0px bottom"
-                    position="absolute"
                     variant="text"
                     @click="arrowDownHint = false"
                 />
