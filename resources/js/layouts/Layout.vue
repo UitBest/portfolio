@@ -34,7 +34,7 @@
                     </template>
                     <template v-slot:append>
                         <v-btn
-                            v-show="pinned"
+                            v-show="pinned || ! mobile"
                             class="align-self-end"
                             color="white"
                             :icon="mobile ? 'mdi-close' : (pinned ? 'mdi-pin' : 'mdi-pin-outline') + ' mdi-rotate-45'"
@@ -124,7 +124,7 @@
     const route = useRoute();
     const router = useRouter();
 
-    const pinned = ref(true);
+    const pinned = ref(! mobile.value);
 
     const showWebsites = ref(false);
     const websites = ref([]);

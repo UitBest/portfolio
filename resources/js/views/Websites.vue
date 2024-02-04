@@ -7,7 +7,7 @@
             <div class="text-h2 py-16 text-center">Websites</div>
         </v-sheet>
         <v-divider class="mx-auto" inset />
-        <v-sheet class="d-flex flex-wrap">
+        <v-sheet class="d-flex flex-wrap mx-auto" max-width="2000">
             <v-sheet
                 v-for="site in sites"
                 :key="site.name"

@@ -1,6 +1,10 @@
 <template>
     <v-parallax scale="0.5" src="/img/MainBackground.jpg">
-        <v-sheet class="d-flex align-center flex-wrap" :class="mobile ? 'flex-column justify-center px-4 py-16' : 'flex-row justify-space-between pa-16'" min-height="100svh">
+        <v-sheet
+            class="d-flex align-center flex-wrap"
+            :class="mobile ? 'flex-column justify-center px-4 py-16' : 'flex-row justify-space-between pa-16'"
+            min-height="100svh"
+        >
             <v-sheet class="d-flex justify-center flex-column align-center" width="100%">
                 <v-img
                     class="bg-transparent elevation-24 rounded-circle align-self-baseline mx-auto my-16"
@@ -11,7 +15,17 @@
                 <div :class="mobile ? 'text-h3' : 'text-h2'">
                     Timo Cuijpers
                 </div>
+
+                <v-btn
+                    class="mt-16 arrowDownHint"
+                    icon="mdi-arrow-down"
+                    location="0px bottom"
+                    position="absolute"
+                    variant="text"
+                    @click="arrowDownHint = false"
+                />
             </v-sheet>
+
             <v-sheet class="d-flex justify-center" height="50svh" width="100%" />
 
             <v-sheet :class="[showExtraIntroInfo ? 'mb-16' : '', mobile ? 'mb-16' : 'pr-8']" :width="mobile ? '100%' : '50%'">
@@ -62,7 +76,7 @@
                     <v-card-title class="text-primary">
                         Hobby's
                     </v-card-title>
-                    <v-card-text class="pb-0">
+                    <v-card-text>
                         <div class="text-caption text-primary">GITAAR</div>
                         <span>Tijdens de stage bij "WEAP" ontstond de gelegenheid om een gitaar te lenen. Dit leidde tot een groeiende interesse in het spelen van simpele akoestische nummers.</span><br><br>
 
@@ -128,12 +142,11 @@
     </v-sheet>
     <v-parallax src="/img/MainBackground2.jpg" width="100%">
         <v-sheet
-            :class="mobile ? 'px-4 py-16' : 'pa-16'"
+            :class="mobile ? 'px-4 py-16' : 'pa-16 mx-auto'"
+            max-width="2000"
             :min-height="mobile ? '1000' : '100svh'"
         >
-            <div
-                class="text-center text-h2 text-primary mb-16"
-            >
+            <div class="text-center text-h2 text-primary mb-16">
                 Carrière
             </div>
             <v-timeline
@@ -194,6 +207,8 @@
     const mobile = computed(() => display.smAndDown.value);
 
     const showExtraIntroInfo = ref(false);
+
+    const arrowDownHint = ref(true);
 
     const qualities = [
         {
@@ -309,3 +324,27 @@
         },
     ];
 </script>
+
+<style>
+
+ .arrowDownHint {
+    animation: sendAnimation 20s ease infinite;
+ }
+
+ @keyframes sendAnimation {
+    0% { transform: translateY(0); }
+    30% { transform: translateY(0); }
+    35% { transform: translateY(200%); }
+    40% { transform: translateY(0); }
+    45% { transform: translateY(200%); }
+    50% { transform: translateY(0); }
+     70% { transform: translateY(0); }
+    75% { transform: translateY(0) scale(200%); }
+    80% { transform: translateY(300%) scale(200%); }
+    85% { transform: translateY(0) scale(200%); }
+    90% { transform: translateY(300%) scale(200%); }
+     95% { transform: translateY(0) scale(200%); }
+     100% { transform: translateY(0); }
+ }
+
+</style>
