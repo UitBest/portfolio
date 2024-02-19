@@ -13,6 +13,7 @@
     <meta name="color-scheme" content="dark" />
 
     <!-- Beschrijving van de pagina -->
+    <meta name="title" content="Timo Cuijpers">
     <meta name="description" content="Ontdek het portfolio van Timo Cuijpers. Blijf op de hoogte voor meer informatie en updates over creatieve ontwerpen en projecten.">
 
     <!-- Trefwoorden voor de pagina -->
