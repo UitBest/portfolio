@@ -1,23 +1,29 @@
 <template>
-    <template v-for="(site, key) in sites" :key="key">
-        <v-sheet
-            v-show="! site.loaded.value && route.name === site.name"
-            class="mx-4 my-4 px-4 py-2 text-center"
-            elevation="10"
-            rounded="xl"
+    <div>
+        <template
+            v-for="(site, key) in sites"
+            :key="key"
         >
-            <div class="text-h4">
-                Even geduld a.u.b.
-            </div>
-            <v-progress-circular indeterminate size="large" />
-        </v-sheet>
-        <embed
-            v-show="route.name === site.name"
-            :src="site.url"
-            style="height: 100%; width: 100%"
-            @load="site.loaded.value = true"
-        />
-    </template>
+            <v-sheet
+                v-show="!site.loaded.value && route.name === site.name"
+                class="mx-4 my-4 px-4 py-2 text-center"
+                elevation="10"
+                rounded="xl"
+            >
+                <div class="text-h4">Even geduld a.u.b.</div>
+                <v-progress-circular
+                    indeterminate
+                    size="large"
+                />
+            </v-sheet>
+            <embed
+                v-show="route.name === site.name"
+                :src="site.url"
+                style="height: 100%; width: 100%"
+                @load="site.loaded.value = true"
+            />
+        </template>
+    </div>
 </template>
 
 <script setup>

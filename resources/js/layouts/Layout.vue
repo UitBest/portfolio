@@ -1,13 +1,13 @@
 <template>
     <v-app>
         <v-navigation-drawer
-            :class="pinned && ! mobile ? '' : 'rounded-lg ma-2'"
+            :class="pinned && !mobile ? '' : 'rounded-lg ma-2'"
             color="transparent"
             elevation="24"
-            :expand-on-hover="! mobile"
+            :expand-on-hover="!mobile"
             permanent
-            :rail="! pinned"
-            :sticky="! pinned || mobile"
+            :rail="!pinned"
+            :sticky="!pinned || mobile"
             style="backdrop-filter: blur(20px)"
         >
             <v-list>
@@ -15,9 +15,9 @@
                     subtitle="timo@uit.best"
                     title="Timo Cuijpers"
                 >
-                    <template v-slot:prepend>
+                    <template #prepend>
                         <v-btn
-                            v-if="mobile && ! pinned"
+                            v-if="mobile && !pinned"
                             class="text-white cursor-pointer"
                             color="white"
                             density="compact"
@@ -32,24 +32,28 @@
                             @click="showProfileOverlay = true"
                         />
                     </template>
-                    <template v-slot:append>
+                    <template #append>
                         <v-btn
-                            v-show="pinned || ! mobile"
+                            v-show="pinned || !mobile"
                             class="align-self-end"
                             color="white"
                             :icon="mobile ? 'mdi-close' : (pinned ? 'mdi-pin' : 'mdi-pin-outline') + ' mdi-rotate-45'"
                             size="36"
                             variant="text"
-                            @click="mobile ? pinned = false : pinned = ! pinned"
+                            @click="mobile ? (pinned = false) : (pinned = !pinned)"
                         />
                     </template>
                 </v-list-item>
             </v-list>
 
-            <v-divider v-show="pinned || ! mobile" />
+            <v-divider v-show="pinned || !mobile" />
 
             <v-expand-transition>
-                <v-list v-show="pinned || ! mobile" density="compact" nav>
+                <v-list
+                    v-show="pinned || !mobile"
+                    density="compact"
+                    nav
+                >
                     <v-list-item
                         v-for="(item, key) in defaultRoutes"
                         :key="key"
@@ -58,7 +62,7 @@
                         :to="item.to"
                     />
                     <v-list-group fluid>
-                        <template v-slot:activator="{ props, isOpen }">
+                        <template #activator="{ props, isOpen }">
                             <v-list-item
                                 :active="route.path === '/websites' || isOpen"
                                 density="compact"
@@ -66,7 +70,7 @@
                                 title="Websites"
                                 :to="{ name: 'Websites' }"
                             >
-                                <template v-slot:append>
+                                <template #append>
                                     <v-btn
                                         v-bind="props"
                                         color="white"
@@ -92,8 +96,17 @@
             </v-expand-transition>
         </v-navigation-drawer>
 
-        <v-main :class="pinned && ! mobile ? '' : 'px-0'" style="min-height: 100svh;">
-            <router-view />
+        <v-main
+            :class="pinned && !mobile ? '' : 'px-0'"
+            style="min-height: 100svh"
+        >
+            <router-view v-slot="{ Component }">
+                <v-fade-transition mode="out-in">
+                    <keep-alive>
+                        <component :is="Component" />
+                    </keep-alive>
+                </v-fade-transition>
+            </router-view>
 
             <v-footer color="dark">
                 <Footer />
@@ -105,7 +118,13 @@
             class="d-flex justify-center align-center"
             eager
         >
-            <ProfileOverlay @close="() => { showProfileOverlay = false }" />
+            <ProfileOverlay
+                @close="
+                    () => {
+                        showProfileOverlay = false;
+                    }
+                "
+            />
         </v-overlay>
     </v-app>
 </template>
@@ -124,7 +143,7 @@
     const route = useRoute();
     const router = useRouter();
 
-    const pinned = ref(! mobile.value);
+    const pinned = ref(!mobile.value);
 
     const showWebsites = ref(false);
     const websites = ref([]);
@@ -144,13 +163,19 @@
         },
     ];
 
-    watch(route, (newRoute) => {
-        if (newRoute.path === '/websites') {
-            showWebsites.value = true;
-        }
-    }, { immediate: true });
+    watch(
+        route,
+        (newRoute) => {
+            if (newRoute.path === '/websites') {
+                showWebsites.value = true;
+            }
+        },
+        { immediate: true }
+    );
 
-    watch(mobile, (value) => { pinned.value = ! value; });
+    watch(mobile, (value) => {
+        pinned.value = !value;
+    });
 
     onMounted(() => {
         const websitesRoute = _.find(router.options.routes[0].children, (route) => route.name === 'Websites');
