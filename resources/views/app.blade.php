@@ -36,11 +36,23 @@
 
     {{--  Styles  --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
-    <link rel="icon" href="/img/Timo.jpeg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/Favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/Favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/Favicon/favicon-16x16.png">
+    <link rel="manifest" href="/img/Favicon/site.webmanifest">
 
     {{--  Scripts  --}}
     @vite('resources/css/app.css')
 
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Timo Cuijpers",
+            "alternateName": ["Timo", "Timo Cuijpers Portfolio"],
+            "url": "https://timo.uit.best",
+        }
+    </script>
 </head>
 <body>
     <div id="app"></div>

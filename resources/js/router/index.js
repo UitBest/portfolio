@@ -4,13 +4,13 @@ const routes = [
     {
         path: '',
         name: 'Layout',
-        component: () => import('@/layouts/Layout.vue'),
+        component: () => import('@/js/layouts/Layout.vue'),
         redirect: { name: 'Home' },
         children: [
             {
                 path: 'home',
                 name: 'Home',
-                component: () => import('@/views/Home.vue'),
+                component: () => import('@/js/views/Home.vue'),
                 meta: {
                     isRoot: true,
                 },
@@ -18,7 +18,7 @@ const routes = [
             {
                 path: 'uit-best',
                 name: 'Uit Best',
-                component: () => import('@/views/UitBest.vue'),
+                component: () => import('@/js/views/UitBest.vue'),
                 meta: {
                     isRoot: true,
                 },
@@ -26,7 +26,7 @@ const routes = [
             {
                 path: 'websites',
                 name: 'Websites',
-                component: () => import('@/views/Websites.vue'),
+                component: () => import('@/js/views/Websites.vue'),
                 meta: {
                     isRoot: true,
                 },
@@ -79,7 +79,7 @@ const routes = [
 const router = createRouter({
     history: createWebHistory(),
     routes,
-    scrollBehavior (to, from, savedPosition) {
+    scrollBehavior(to, from, savedPosition) {
         if (to.hash) {
             return {
                 el: to.hash,

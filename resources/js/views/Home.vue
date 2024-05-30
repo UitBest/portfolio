@@ -1,20 +1,25 @@
 <template>
-    <v-parallax scale="0.5" src="/img/MainBackground.jpg">
+    <v-parallax
+        scale="0.5"
+        src="/img/MainBackground.jpg"
+    >
         <v-sheet
             class="d-flex align-center flex-wrap"
             :class="mobile ? 'flex-column justify-center px-4 py-16' : 'flex-row justify-space-between pa-16'"
             min-height="100svh"
         >
-            <v-sheet class="d-flex justify-center flex-column align-center" width="100%">
+            <v-sheet
+                class="d-flex justify-center flex-column align-center"
+                width="100%"
+            >
                 <v-img
                     class="bg-transparent elevation-24 rounded-circle align-self-baseline mx-auto my-16"
+                    eager
                     src="/img/TimoCutOut.png"
                     style="backdrop-filter: blur(20px)"
                     width="400"
                 />
-                <div :class="mobile ? 'text-h3' : 'text-h2'">
-                    Timo Cuijpers
-                </div>
+                <div :class="mobile ? 'text-h3' : 'text-h2'">Timo Cuijpers</div>
 
                 <v-btn
                     v-if="arrowDownHint"
@@ -25,34 +30,70 @@
                 />
             </v-sheet>
 
-            <v-sheet class="d-flex justify-center" height="50svh" width="100%" />
+            <v-sheet
+                class="d-flex justify-center"
+                height="50svh"
+                width="100%"
+            />
 
-            <v-sheet :class="[showExtraIntroInfo ? 'mb-16' : '', mobile ? 'mb-16' : 'pr-8']" :width="mobile ? '100%' : '50%'">
+            <v-sheet
+                :class="[showExtraIntroInfo ? 'mb-16' : '', mobile ? 'mb-16' : 'pr-8']"
+                :width="mobile ? '100%' : '50%'"
+            >
                 <v-card
                     color="transparent"
                     elevation="24"
                     style="backdrop-filter: blur(20px)"
                 >
-                    <v-card-title class="text-primary">
-                        Bio
-                    </v-card-title>
+                    <v-card-title class="text-primary"> Bio </v-card-title>
                     <v-card-text class="pb-0">
                         <div class="text-caption text-primary">OVER MIJ</div>
-                        <div>Welkom op mijn portfolio website.</div><br>
-                        <div>Ik ben Timo Cuijpers, geboren en getogen in Best.</div><br>
-                        <div>Tijdens mijn afstudeerstage bij "WEAP" ontstond er een enorme persoonlijke en professionele groei. Deze ontwikkeling was te danken aan de professionele werkomgeving en het aanleren van verantwoordelijkheidsgevoel.</div><br>
+                        <div>Welkom op mijn portfolio website.</div>
+                        <br />
+                        <div>Ik ben Timo Cuijpers, geboren en getogen in Best.</div>
+                        <br />
+                        <div>
+                            Tijdens mijn afstudeerstage bij "WEAP" ontstond er een enorme persoonlijke en professionele
+                            groei. Deze ontwikkeling was te danken aan de professionele werkomgeving en het aanleren van
+                            verantwoordelijkheidsgevoel.
+                        </div>
+                        <br />
 
                         <v-expand-transition>
                             <v-sheet v-show="showExtraIntroInfo">
-                                <v-divider /><br>
+                                <v-divider /><br />
                                 <div class="text-caption text-primary">STUDIE</div>
-                                <div>In 2020 vond er een overgang plaats van het Kempenhorst College in Oirschot naar het Summa College in Eindhoven. Aanvankelijk was de inschrijving voor de opleiding Expert IT, maar binnen een half jaar werd duidelijk dat een grotere interesse lag bij programmeren.</div><br>
-                                <div>Deze nieuwe inzichten leidden tot een overstap naar de opleiding 'Software Developer', die begin 2024 succesvol werd afgerond.</div><br>
-                                <v-divider /><br>
+                                <div>
+                                    In 2020 vond er een overgang plaats van het Kempenhorst College in Oirschot naar het
+                                    Summa College in Eindhoven. Aanvankelijk was de inschrijving voor de opleiding Expert
+                                    IT, maar binnen een half jaar werd duidelijk dat een grotere interesse lag bij
+                                    programmeren.
+                                </div>
+                                <br />
+                                <div>
+                                    Deze nieuwe inzichten leidden tot een overstap naar de opleiding 'Software
+                                    Developer', die begin 2024 succesvol werd afgerond.
+                                </div>
+                                <br />
+                                <v-divider /><br />
                                 <div class="text-caption text-primary">EIGEN BEDRIJF</div>
-                                <div>Na het versneld afronden van de opleiding en een leerzame stageperiode, werd de stap gezet om een eigen onderneming, 'Uit Best', op te richten. Deze kans deed zich voor in een kamer van <a class="text-white" href="https://www.dieder.it/" target="_blank">mijn vaders bedrijf</a>. Dankbaarheid wordt uitgesproken voor de mogelijkheid en de waardevolle adviezen over het runnen van een eigen bedrijf.</div><br>
-                                <div>De eindstage bood essentiële inzichten en het vertrouwen dat het starten van een eigen bedrijf een haalbare droom is.</div>
-
+                                <div>
+                                    Na het versneld afronden van de opleiding en een leerzame stageperiode, werd de stap
+                                    gezet om een eigen onderneming, 'Uit Best', op te richten. Deze kans deed zich voor
+                                    in een kamer van
+                                    <a
+                                        class="text-white"
+                                        href="https://www.dieder.it/"
+                                        target="_blank"
+                                        >mijn vaders bedrijf</a
+                                    >. Dankbaarheid wordt uitgesproken voor de mogelijkheid en de waardevolle adviezen
+                                    over het runnen van een eigen bedrijf.
+                                </div>
+                                <br />
+                                <div>
+                                    De eindstage bood essentiële inzichten en het vertrouwen dat het starten van een
+                                    eigen bedrijf een haalbare droom is.
+                                </div>
                             </v-sheet>
                         </v-expand-transition>
                     </v-card-text>
@@ -61,26 +102,36 @@
                         <v-btn
                             :icon="(showExtraIntroInfo ? 'mdi-rotate-180' : '') + ' mdi-chevron-down'"
                             variant="text"
-                            @click="showExtraIntroInfo = ! showExtraIntroInfo"
+                            @click="showExtraIntroInfo = !showExtraIntroInfo"
                         />
                     </v-card-actions>
                 </v-card>
             </v-sheet>
-            <v-sheet :class="! mobile && 'pl-8'" :width="mobile ? '100%' : '50%'">
+            <v-sheet
+                :class="!mobile && 'pl-8'"
+                :height="!mobile ? '100%' : undefined"
+                :width="mobile ? '100%' : '50%'"
+            >
                 <v-card
                     color="transparent"
                     elevation="24"
+                    height="100%"
                     style="backdrop-filter: blur(20px)"
                 >
-                    <v-card-title class="text-primary">
-                        Hobby's
-                    </v-card-title>
+                    <v-card-title class="text-primary"> Hobby's </v-card-title>
                     <v-card-text>
                         <div class="text-caption text-primary">GITAAR</div>
-                        <span>Tijdens de stage bij "WEAP" ontstond de gelegenheid om een gitaar te lenen. Dit leidde tot een groeiende interesse in het spelen van simpele akoestische nummers.</span><br><br>
+                        <span
+                            >Tijdens de stage bij "WEAP" ontstond de gelegenheid om een gitaar te lenen. Dit leidde tot
+                            een groeiende interesse in het spelen van simpele akoestische nummers.</span
+                        ><br /><br />
 
                         <div class="text-caption text-primary">BASKETBAL</div>
-                        <span>Basketbal, gestart in 2016, is uitgegroeid tot een belangrijke activiteit, met BCO Oirschot als de gekozen club voor training en wedstrijden. Deze sport biedt niet alleen een manier om fysiek actief te zijn, maar ook een platform voor persoonlijke ontwikkeling.</span>
+                        <span
+                            >Basketbal, gestart in 2016, is uitgegroeid tot een belangrijke activiteit, met BCO Oirschot
+                            als de gekozen club voor training en wedstrijden. Deze sport biedt niet alleen een manier om
+                            fysiek actief te zijn, maar ook een platform voor persoonlijke ontwikkeling.</span
+                        >
                     </v-card-text>
                 </v-card>
             </v-sheet>
@@ -91,15 +142,29 @@
         :class="mobile ? 'px-4 py-10' : 'pa-10'"
         color="dark"
     >
-        <v-btn class="mx-auto" icon="mdi-trophy-outline" variant="tonal"/>
+        <v-btn
+            class="mx-auto"
+            icon="mdi-trophy-outline"
+            variant="tonal"
+        />
 
-        <v-sheet class="d-flex justify-lg-space-evenly" :class="mobile && 'flex-column'">
-            <v-card class="mt-4 w-100" color="transparent" max-width="800">
-                <template v-slot:title>
+        <v-sheet
+            class="d-flex justify-lg-space-evenly"
+            :class="mobile && 'flex-column'"
+        >
+            <v-card
+                class="mt-4 w-100"
+                color="transparent"
+                max-width="800"
+            >
+                <template #title>
                     <div class="text-primary text-center">PRO'S</div>
                 </template>
                 <v-card-text>
-                    <v-expansion-panels class="my-4 rounded-lg" color="background">
+                    <v-expansion-panels
+                        class="my-4 rounded-lg"
+                        color="background"
+                    >
                         <v-expansion-panel
                             v-for="(quality, key) in qualities"
                             :key="key"
@@ -109,20 +174,23 @@
                             rounded="lg"
                             title="Klantinteractie"
                         >
-                            <template v-slot:title>
+                            <template #title>
                                 <v-card
                                     class="d-flex align-center"
                                     color="transparent"
                                     density="compact"
                                     variant="flat"
                                 >
-                                    <v-avatar class="mr-4 text-white" :icon="quality.icon" />
+                                    <v-avatar
+                                        class="mr-4 text-white"
+                                        :icon="quality.icon"
+                                    />
                                     <v-card-title class="pa-0 mt-1">
                                         {{ quality.title }}
                                     </v-card-title>
                                 </v-card>
                             </template>
-                            <template v-slot:text>
+                            <template #text>
                                 <v-sheet class="py-4">
                                     <div class="text-body-1">
                                         {{ quality.subtitle }}
@@ -139,17 +207,21 @@
             </v-card>
         </v-sheet>
     </v-sheet>
-    <v-parallax src="/img/MainBackground2.jpg" width="100%">
+    <v-parallax
+        src="/img/MainBackground2.jpg"
+        width="100%"
+    >
         <v-sheet
             :class="mobile ? 'px-4 py-16' : 'pa-16 mx-auto'"
             max-width="2000"
             :min-height="mobile ? '1000' : '100svh'"
+            width="100%"
         >
-            <div class="text-center text-h2 text-primary mb-16">
-                Carrière
-            </div>
+            <div class="text-center text-h2 text-primary mb-16">Carrière</div>
             <v-timeline
                 align="start"
+                class="mb-16"
+                :density="mobile ? 'compact' : undefined"
                 :justify="mobile ? undefined : 'center'"
                 line-color="primary"
                 line-inset="16"
@@ -162,6 +234,7 @@
                     dot-color="white"
                     fill-dot
                     size="x-small"
+                    width="100%"
                 >
                     <v-card
                         color="transparent"
@@ -194,6 +267,145 @@
                     </v-card>
                 </v-timeline-item>
             </v-timeline>
+
+            <div class="text-center text-h2 text-primary mb-6">Uit Best</div>
+
+            <div class="text-center text-body text-disabled mb-16">*Milestones*</div>
+            <v-timeline
+                align="start"
+                :density="mobile ? 'compact' : undefined"
+                :justify="mobile ? undefined : 'center'"
+                line-color="primary"
+                line-inset="16"
+                :side="mobile ? 'end' : undefined"
+                truncate-line="both"
+            >
+                <v-timeline-item
+                    v-for="(milestone, key) in milestones"
+                    :key="key"
+                    dot-color="white"
+                    fill-dot
+                    size="x-small"
+                    width="100%"
+                >
+                    <v-card
+                        color="transparent"
+                        elevation="20"
+                        style="backdrop-filter: blur(20px)"
+                        :subtitle="milestone.period"
+                        :title="milestone.title"
+                    >
+                        <v-card-text>
+                            <div class="font-weight-black text-h6 text-primary">
+                                {{ milestone.function }}
+                            </div>
+
+                            <component
+                                :is="milestone.expansionPanels?.length > 0 ? 'v-expansion-panels' : 'v-list'"
+                                bg-color="transparent"
+                                color="transparent"
+                            >
+                                <template v-if="milestone.expansionPanels?.length > 0">
+                                    <v-expansion-panel
+                                        v-for="(item, descriptionKey) in milestone.expansionPanels"
+                                        :key="descriptionKey"
+                                        bg-color="transparent"
+                                        class="newsSelection"
+                                        collapse-icon="mdi-minus"
+                                        color="background"
+                                        elevation="0"
+                                        rounded="lg"
+                                    >
+                                        <v-expansion-panel-title>
+                                            <v-card
+                                                class="d-flex align-center"
+                                                color="transparent"
+                                                density="compact"
+                                                variant="flat"
+                                            >
+                                                <v-avatar
+                                                    class="mr-4 text-white"
+                                                    :icon="item.icon"
+                                                />
+                                                <v-card-title class="pa-0 mt-1">
+                                                    {{ item.title }}
+                                                </v-card-title>
+                                            </v-card>
+                                        </v-expansion-panel-title>
+                                        <v-expansion-panel-text>
+                                            <v-menu
+                                                v-if="item.iframe"
+                                                origin="auto"
+                                                width="100%"
+                                            >
+                                                <template #activator="{ props }">
+                                                    <v-card
+                                                        v-bind="props"
+                                                        class="mt-6"
+                                                        color="transparent"
+                                                        elevation="20"
+                                                        style="backdrop-filter: blur(20px)"
+                                                    >
+                                                        <v-img
+                                                            aspect-ratio="1.30"
+                                                            cover
+                                                            :eager="true"
+                                                            :lazy-src="item.iframe.image"
+                                                            :src="item.iframe.image"
+                                                        />
+
+                                                        <v-card-title>
+                                                            {{ item.iframe.title }}
+                                                        </v-card-title>
+                                                        <v-divider />
+
+                                                        <v-card-text>
+                                                            {{ item.iframe.subtitle }}
+                                                        </v-card-text>
+                                                    </v-card>
+                                                </template>
+
+                                                <v-card
+                                                    color="background"
+                                                    density="compact"
+                                                    variant="flat"
+                                                >
+                                                    <iframe
+                                                        class="rounded-lg"
+                                                        height="500px"
+                                                        :src="item.iframe.link"
+                                                        width="100%"
+                                                    />
+                                                    <v-card-text>
+                                                        <a
+                                                            class="text-white"
+                                                            :href="item.iframe.link"
+                                                            target="_blank"
+                                                        >
+                                                            {{ item.iframe.link }}
+                                                        </a>
+                                                    </v-card-text>
+                                                </v-card>
+                                            </v-menu>
+                                        </v-expansion-panel-text>
+                                    </v-expansion-panel>
+                                </template>
+
+                                <template v-else-if="milestone.description?.length > 0">
+                                    <v-list-item
+                                        v-for="(description, descriptionKey) in milestone.description"
+                                        :key="descriptionKey"
+                                        color="transparent"
+                                        variant="text"
+                                    >
+                                        - {{ description }}
+                                    </v-list-item>
+                                </template>
+                            </component>
+                        </v-card-text>
+                    </v-card>
+                </v-timeline-item>
+            </v-timeline>
         </v-sheet>
     </v-parallax>
 </template>
@@ -214,13 +426,15 @@
             icon: 'mdi-account-group',
             title: 'Klantinteractie',
             subtitle: 'Vaardigheid in Klantinteractie',
-            description: 'IT-termen kunnen complex zijn. Daarom is er een sterke aanpasbaarheid in woordkeuze, om technische concepten in eenvoudige bewoordingen uit te leggen, indien nodig.',
+            description:
+                'IT-termen kunnen complex zijn. Daarom is er een sterke aanpasbaarheid in woordkeuze, om technische concepten in eenvoudige bewoordingen uit te leggen, indien nodig.',
         },
         {
             icon: 'mdi-fast-forward',
             title: 'Enthousiasme',
             subtitle: 'Enthousiasme als Drijfveer',
-            description: 'Bij het beginnen aan een website wordt deze met zorg en aandacht afgemaakt. Het bespreken van designs met collega Jelle is een belangrijk onderdeel van het proces, om zo verschillende perspectieven en ideeën te verkrijgen over de betreffende websites. Het doel is om elke website met trots af te ronden, wetende dat er alles aan is gedaan om een optimaal resultaat te bereiken.',
+            description:
+                'Bij het beginnen aan een website wordt deze met zorg en aandacht afgemaakt. Het bespreken van designs met collega Jelle is een belangrijk onderdeel van het proces, om zo verschillende perspectieven en ideeën te verkrijgen over de betreffende websites. Het doel is om elke website met trots af te ronden, wetende dat er alles aan is gedaan om een optimaal resultaat te bereiken.',
         },
     ];
 
@@ -229,26 +443,19 @@
             company: 'Kempenhorst College (Oirschot)',
             period: 'augustus 2016 - mei 2020',
             function: 'VMBO-T / MAVO',
-            description: [
-                'Technisch keuzendeel',
-            ],
+            description: ['Technisch keuzendeel'],
         },
         {
             company: 'Axender (Best)',
             period: 'februari 2017 - juni 2018',
             function: 'Folderbezorger',
-            description: [
-                'Folders insteken en daarna in de wijk bezorgen',
-            ],
+            description: ['Folders insteken en daarna in de wijk bezorgen'],
         },
         {
             company: 'Dieder.IT (Best)',
             period: 'april 2020 - augustus 2020',
             function: 'Stagiair',
-            description: [
-                'Basis kennis IT leren',
-                'Voorbereiding Summa College Expert IT',
-            ],
+            description: ['Basis kennis IT leren', 'Voorbereiding Summa College Expert IT'],
         },
         {
             company: 'MAJO Diensten (Eindhoven)',
@@ -305,12 +512,49 @@
             company: 'WEAP (Gemert)',
             period: 'september 2023 - januari 2024',
             function: 'Stagiair',
-            description: [
-                'Ontwikkelen van een stand-up tool voor intern gebruik',
-            ],
+            description: ['Ontwikkelen van een stand-up tool voor intern gebruik'],
         },
         {
             company: 'Uit Best (Best)',
+            period: 'Januari 2024 - heden',
+            function: 'Eigenaar',
+            description: [
+                'Designen en ontwerpen van websites',
+                'Interviews afnemen',
+                'Front-end van web-applicaties bouwen',
+                'Websites bouwen',
+                'Administratie',
+            ],
+        },
+    ];
+
+    const milestones = [
+        {
+            title: 'Summa College - Nieuws',
+            period: 'Maart 2024',
+            expansionPanels: [
+                {
+                    title: 'Summa Website',
+                    icon: 'mdi-school',
+                    iframe: {
+                        image: '/img/TimoNieuws.jpg',
+                        title: 'Timo is al ondernemer in de ICT',
+                        subtitle:
+                            'Hij heeft zijn diploma nog niet eens officieel ontvangen, maar heeft al wel zijn eerste stappen gezet als ondernemer – de eerste facturen zijn inmiddels de deur uit.',
+                        link: 'https://www.summacollege.nl/over-summa/nieuws/timo-is-al-ondernemer-in-de-ict',
+                    },
+                },
+                {
+                    title: 'LinkedIn',
+                    icon: 'mdi-linkedin',
+                    subtitle: 'Vaardigheid in Klantinteractie',
+                    description:
+                        'IT-termen kunnen complex zijn. Daarom is er een sterke aanpasbaarheid in woordkeuze, om technische concepten in eenvoudige bewoordingen uit te leggen, indien nodig.',
+                },
+            ],
+        },
+        {
+            title: 'Uit Best',
             period: 'Januari 2024 - heden',
             function: 'Eigenaar',
             description: [
