@@ -1,14 +1,14 @@
 <template>
     <v-app>
         <v-navigation-drawer
-            :class="pinned && !mobile ? '' : 'rounded-lg ma-2'"
-            color="transparent"
+            :class="pinned && !mobile ? '' : 'rounded-lg ma-2 opacity-80'"
+            :color="mobile ? 'black' : 'transparent'"
             elevation="24"
             :expand-on-hover="!mobile"
             permanent
             :rail="!pinned"
             :sticky="!pinned || mobile"
-            style="backdrop-filter: blur(20px)"
+            style="backdrop-filter: blur(5px)"
         >
             <v-list>
                 <v-list-item
@@ -60,6 +60,7 @@
                         :prepend-icon="item.icon"
                         :title="item.name"
                         :to="item.to"
+                        @click="pinned = !mobile"
                     />
                     <v-list-group fluid>
                         <template #activator="{ props, isOpen }">
@@ -69,6 +70,7 @@
                                 prepend-icon="mdi-web"
                                 title="Websites"
                                 :to="{ name: 'Websites' }"
+                                @click="pinned = !mobile"
                             >
                                 <template #append>
                                     <v-btn
@@ -90,6 +92,7 @@
                             :title="item.name"
                             :to="item.to"
                             :value="item.name"
+                            @click="pinned = !mobile"
                         />
                     </v-list-group>
                 </v-list>
@@ -108,9 +111,7 @@
                 </v-fade-transition>
             </router-view>
 
-            <v-footer color="dark">
-                <Footer />
-            </v-footer>
+            <Footer />
         </v-main>
 
         <v-overlay

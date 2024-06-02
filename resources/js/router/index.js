@@ -58,15 +58,15 @@ const routes = [
                         },
                     },
                     {
-                        path: 'majo-diensten',
-                        name: 'MAJO Diensten',
+                        path: 'madje-diensten',
+                        name: 'Madje Diensten',
                         component: parent,
                         meta: {
                             isRoot: false,
                             sidebar: {
                                 icon: 'mdi-broom',
-                                name: 'MAJO Diensten',
-                                to: { name: 'MAJO Diensten' },
+                                name: 'Madje Diensten',
+                                to: { name: 'Madje Diensten' },
                             },
                         },
                     },

@@ -132,6 +132,15 @@
             imgUrl: '/img/4TorentjesCutOut.png',
         },
         {
+            name: 'Madje Diensten',
+            url: 'https://www.madjediensten.nl',
+            loaded: ref(false),
+            description: 'Madjediensten.nl biedt informatie over schoonmaakdiensten, opgezet voor een familielid',
+            duration: '18 uur',
+            when: 'Midden 2023',
+            imgUrl: '/img/MadjeDienstenCutOut.png',
+        },
+        {
             name: 'Beauty Education',
             url: 'https://www.beautyeducation.nl',
             loaded: ref(false),
@@ -140,15 +149,6 @@
             duration: '90 uur per persoon (3 personen)',
             when: 'Eind 2022 - Midden 2023',
             imgUrl: '/img/BeautyEducationCutOut.png',
-        },
-        {
-            name: 'MAJO Diensten',
-            url: 'https://www.majodiensten.nl',
-            loaded: ref(false),
-            description: 'MAJODiensten.nl biedt informatie over schoonmaakdiensten, opgezet voor een familielid',
-            duration: '18 uur',
-            when: 'Midden 2023',
-            imgUrl: '/img/MAJODienstenCutOut.png',
         },
     ];
 </script>
