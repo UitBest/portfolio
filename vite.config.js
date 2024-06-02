@@ -11,9 +11,6 @@ export default defineConfig({
         hmr: {
             host: process.env.HMR_HOST || 'localhost',
         },
-        warmup: {
-            clientFiles: ['resources/js/layouts/Layout.vue'],
-        },
     },
     resolve: {
         alias: {
