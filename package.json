@@ -28,7 +28,6 @@
         "vite": "^5.2.6"
     },
     "dependencies": {
-        "@canvasjs/vue-charts": "^1.0.4",
         "@vuetify/loader-shared": "^2.0.3",
         "dotenv": "^16.3.1",
         "dotenv-webpack": "^8.0.1",

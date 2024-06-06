@@ -17,5 +17,8 @@ export default defineConfig({
             '@': '/resources',
         },
     },
+    build: {
+        chunkSizeWarningLimit: 1024,
+    },
     plugins: [laravel(['resources/css/app.css', 'resources/js/app.js']), vue(), vuetify()],
 });

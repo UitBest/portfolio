@@ -179,8 +179,8 @@
                             ><br />
                             <a
                                 :class="darkColor ? 'text-white' : 'text-dark'"
-                                href="/websites/majo-diensten"
-                                >MAJO Diensten</a
+                                href="/websites/madje-diensten"
+                                >Madje Diensten</a
                             ><br />
                         </div>
                     </div>
