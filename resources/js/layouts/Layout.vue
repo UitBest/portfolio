@@ -65,7 +65,7 @@
                     <v-list-group fluid>
                         <template #activator="{ props, isOpen }">
                             <v-list-item
-                                :active="route.path === '/websites' || isOpen"
+                                :active="route.path === '/websites' || route.name === 'Websites' || isOpen"
                                 density="compact"
                                 prepend-icon="mdi-web"
                                 title="Websites"
@@ -85,6 +85,7 @@
                                 </template>
                             </v-list-item>
                         </template>
+
                         <v-list-item
                             v-for="(item, key) in websites"
                             :key="key"

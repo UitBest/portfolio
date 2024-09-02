@@ -122,6 +122,24 @@
 
     const sites = [
         {
+            name: 'DiederIT',
+            url: 'https://diederit.uit-best.nl',
+            loaded: ref(false),
+            description: 'test',
+            duration: '16 uur (inclusief design, exclusief tekst)',
+            when: 'Midden 2024',
+            imgUrl: '/img/diederit-preview.png',
+        },
+        {
+            name: 'Appeldoorn Riooltechniek',
+            url: 'https://appeldoorn-riooltechniek.nl',
+            loaded: ref(false),
+            description: 'test',
+            duration: '18 uur (exclusief design, exclusief tekst)',
+            when: 'Midden 2024',
+            imgUrl: '/img/appeldoorn-riooltechniek-preview.png',
+        },
+        {
             name: '4 Torentjes',
             url: 'https://www.4torentjes.nl',
             loaded: ref(false),

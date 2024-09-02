@@ -1,0 +1,72 @@
+services:
+    app:
+        image: portfolio_app:latest
+        container_name: portfolio_app
+        build:
+            context: .
+            dockerfile: Dockerfile
+            target: app
+        tty: true
+        stdin_open: true
+        volumes:
+            - .:/var/www
+        restart: unless-stopped
+        networks:
+            - portfolio
+
+    serve:
+        image: portfolio_serve:latest
+        container_name: portfolio_serve
+        build:
+            context: .
+            dockerfile: Dockerfile
+            target: serve
+        ports:
+            - "8000:8000"
+        tty: false
+        stdin_open: false
+        volumes:
+            - .:/var/www
+        restart: unless-stopped
+        networks:
+            - portfolio
+
+    dev:
+        image: portfolio_dev:latest
+        container_name: portfolio_dev
+        build:
+            context: .
+            dockerfile: Dockerfile
+            target: dev
+        ports:
+            - "1683:1683"
+        tty: false
+        stdin_open: false
+        volumes:
+            - .:/var/www
+        restart: always
+        networks:
+            - portfolio
+
+    db:
+        image: mysql:8.0
+        container_name: portfolio_db
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_DATABASE: laravel
+            MYSQL_ROOT_PASSWORD: root
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
+        volumes:
+            - dbdata:/var/lib/mysql
+        networks:
+            - portfolio
+networks:
+    portfolio:
+
+volumes:
+    dbdata:
+        driver: local

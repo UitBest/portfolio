@@ -4,6 +4,19 @@
             scale="0.5"
             src="/img/MainBackground.jpg"
         >
+            <!--        <div id="parallax1">-->
+            <!--        <v-parallax-->
+            <!--            id="bg1"-->
+            <!--        >-->
+            <!--        <template #placeholder>-->
+            <!--        <v-img-->
+            <!--            gradient="193deg, rgba(26,0,71,1) 0%, rgba(52,1,130,1) 25%, rgba(95,0,196,1) 50%, rgba(40,4,76,1) 50%, rgba(60,7,115,1) 75%, rgba(151,86,180,1) 75%, rgba(60,4,121,1) 100%"-->
+            <!--            height="100%"-->
+            <!--            position="fixed"-->
+            <!--            src="/"-->
+            <!--            style="top: -200px"-->
+            <!--        />-->
+            <!--        </template>-->
             <v-sheet
                 class="d-flex align-center flex-wrap"
                 :class="mobile ? 'flex-column justify-center px-4 py-16' : 'flex-row justify-space-between pa-16'"
@@ -13,13 +26,18 @@
                     class="d-flex justify-center flex-column align-center"
                     width="100%"
                 >
-                    <v-img
-                        class="bg-transparent elevation-24 rounded-circle align-self-baseline mx-auto my-16"
-                        eager
-                        src="/img/TimoCutOut.png"
-                        style="backdrop-filter: blur(20px)"
+                    <v-responsive
+                        class="rounded-circle elevation-24 d-flex justify-center align-center"
+                        height="400"
                         width="400"
-                    />
+                    >
+                        <v-img
+                            eager
+                            src="/img/TimoCutOutLower.png"
+                            style="backdrop-filter: blur(20px)"
+                        />
+                    </v-responsive>
+
                     <div :class="mobile ? 'text-h3' : 'text-h2'">Timo Cuijpers</div>
 
                     <v-btn
@@ -357,7 +375,9 @@
                     </v-timeline-item>
                 </v-timeline>
 
-                <div class="text-center text-h2 text-primary mb-16">Carrière</div>
+                <v-divider class="my-16" />
+
+                <div class="text-center text-h2 text-primary my-16">Carrière</div>
 
                 <v-timeline
                     align="start"
@@ -420,6 +440,8 @@
 
     const router = useRouter();
 
+    const gradient1 = ref(null);
+
     const display = useDisplay();
     const mobile = computed(() => display.smAndDown.value);
 
@@ -451,6 +473,26 @@
     ];
 
     const milestones = [
+        {
+            title: 'Lancering Dieder.IT Website',
+            period: 'September 2024',
+            iframe: {
+                image: '/img/diederit-preview.png',
+                title: 'Dieder.IT website opknappen',
+                subtitle: 'Moderniseren van out-dated website.',
+                link: 'https://diederit.uit-best.nl/',
+            },
+        },
+        {
+            title: 'Lancering Appeldoorn Website',
+            period: 'Augustus 2024',
+            iframe: {
+                image: '/img/appeldoorn-riooltechniek-preview.png',
+                title: 'Herbouwen Appeldoorn Riooltechniek Website ',
+                subtitle: 'Overzetten website van Wordpress naar programmering',
+                link: 'https://appeldoorn-riooltechniek.nl/',
+            },
+        },
         {
             title: 'Summa College - Nieuws',
             period: 'Maart 2024',
@@ -557,6 +599,12 @@
 
 <style>
 
+body {
+
+    transform-style: preserve-3d;
+    overflow-y: auto;
+    perspective: 1px;
+}
  .arrowDownHint {
     animation: sendAnimation 20s ease infinite;
  }

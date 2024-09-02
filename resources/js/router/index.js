@@ -32,6 +32,32 @@ const routes = [
                 },
                 children: [
                     {
+                        path: 'dieder-it',
+                        name: 'DiederIT',
+                        component: parent,
+                        meta: {
+                            isRoot: false,
+                            sidebar: {
+                                icon: 'mdi-laptop',
+                                name: 'Dieder.IT',
+                                to: { name: 'DiederIT' },
+                            },
+                        },
+                    },
+                    {
+                        path: 'appeldoorn-riooltechniek',
+                        name: 'Appeldoorn Riooltechniek',
+                        component: parent,
+                        meta: {
+                            isRoot: false,
+                            sidebar: {
+                                icon: 'mdi-toolbox',
+                                name: 'Appeldoorn Riooltechniek',
+                                to: { name: 'Appeldoorn Riooltechniek' },
+                            },
+                        },
+                    },
+                    {
                         path: '4torentjes',
                         name: '4 Torentjes',
                         component: parent,
@@ -45,19 +71,6 @@ const routes = [
                         },
                     },
                     {
-                        path: 'beauty-education',
-                        name: 'Beauty Education',
-                        component: parent,
-                        meta: {
-                            isRoot: false,
-                            sidebar: {
-                                icon: 'mdi-brush',
-                                name: 'Beauty Education',
-                                to: { name: 'Beauty Education' },
-                            },
-                        },
-                    },
-                    {
                         path: 'madje-diensten',
                         name: 'Madje Diensten',
                         component: parent,
@@ -67,6 +80,19 @@ const routes = [
                                 icon: 'mdi-broom',
                                 name: 'Madje Diensten',
                                 to: { name: 'Madje Diensten' },
+                            },
+                        },
+                    },
+                    {
+                        path: 'beauty-education',
+                        name: 'Beauty Education',
+                        component: parent,
+                        meta: {
+                            isRoot: false,
+                            sidebar: {
+                                icon: 'mdi-brush',
+                                name: 'Beauty Education',
+                                to: { name: 'Beauty Education' },
                             },
                         },
                     },
