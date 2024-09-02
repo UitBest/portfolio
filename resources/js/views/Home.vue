@@ -27,7 +27,7 @@
                     width="100%"
                 >
                     <v-responsive
-                        class="rounded-circle elevation-24 d-flex justify-center align-center"
+                        class="rounded-circle elevation-24 d-flex justify-center align-center mb-16"
                         height="400"
                         width="400"
                     >
