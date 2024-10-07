@@ -123,7 +123,7 @@
     const sites = [
         {
             name: 'DiederIT',
-            url: 'https://diederit.uit-best.nl',
+            url: 'https://dieder.it',
             loaded: ref(false),
             description: 'Originele website was outdated en moest een nieuw design krijgen.',
             duration: '16 uur (inclusief design, exclusief tekst)',
