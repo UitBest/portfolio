@@ -125,11 +125,11 @@
                     </KeepAlive>
                 </v-fade-transition>
             </router-view>
-        </v-main>
 
-        <v-footer :color="darkColor ? 'dark' : 'white'">
-            <Footer v-model:dark-color="darkColor" />
-        </v-footer>
+            <v-footer :color="darkColor ? 'dark' : 'white'">
+                <Footer v-model:dark-color="darkColor" />
+            </v-footer>
+        </v-main>
 
         <v-overlay
             v-model="showProfileOverlay"
