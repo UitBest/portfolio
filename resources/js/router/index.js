@@ -1,4 +1,5 @@
 import { createWebHistory, createRouter } from 'vue-router';
+import { ref } from 'vue';
 
 const routes = [
     {
@@ -105,15 +106,6 @@ const routes = [
 const router = createRouter({
     history: createWebHistory(),
     routes,
-    scrollBehavior(to, from, savedPosition) {
-        if (to.hash) {
-            return {
-                el: to.hash,
-                behavior: 'smooth',
-            };
-        }
-        return savedPosition || { top: 0 };
-    },
 });
 
 export default router;

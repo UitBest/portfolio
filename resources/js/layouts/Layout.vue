@@ -1,43 +1,47 @@
 <template>
     <v-app>
         <v-navigation-drawer
-            :class="pinned && !mobile ? '' : 'rounded-lg ma-2 opacity-80'"
-            :color="mobile ? 'black' : 'transparent'"
-            elevation="24"
-            :expand-on-hover="!mobile"
-            permanent
-            :rail="!pinned"
-            :sticky="!pinned || mobile"
-            style="backdrop-filter: blur(5px)"
+            v-model="drawer"
+            close-delay="300"
+            color="dark"
+            expand-on-hover
+            :permanent="!mobile"
+            :rail="!pinned && !mobile"
+            :temporary="mobile"
         >
-            <v-list>
+            <!--                    <v-navigation-drawer-->
+            <!--                        :class="pinned && !mobile ? '' : 'rounded-lg ma-2'"-->
+            <!--                        :color="mobile ? 'black' : 'transparent'"-->
+            <!--                        :expand-on-hover="!mobile"-->
+            <!--                        :floating="mobile"-->
+            <!--                        :permanent="!mobile"-->
+            <!--                        :rail="!pinned"-->
+            <!--                        :sticky="!pinned || mobile"-->
+            <!--                        :temporary="mobile"-->
+            <!--                    >-->
+            <v-list
+                bg-color="dark"
+                rounded="lg"
+            >
                 <v-list-item
                     subtitle="timo@uit.best"
                     title="Timo Cuijpers"
                 >
                     <template #prepend>
-                        <v-btn
-                            v-if="mobile && !pinned"
-                            class="text-white cursor-pointer"
-                            color="white"
-                            density="compact"
-                            icon="mdi-menu"
-                            variant="text"
-                            @click.stop.prevent="pinned = true"
-                        />
                         <v-avatar
-                            v-else
                             class="cursor-pointer"
-                            image="/img/Timo.jpeg"
+                            :image="profileAvatar"
                             @click="showProfileOverlay = true"
                         />
                     </template>
-                    <template #append>
+                    <template
+                        v-if="!mobile"
+                        #append
+                    >
                         <v-btn
-                            v-show="pinned || !mobile"
                             class="align-self-end"
                             color="white"
-                            :icon="mobile ? 'mdi-close' : (pinned ? 'mdi-pin' : 'mdi-pin-outline') + ' mdi-rotate-45'"
+                            :icon="(pinned ? 'mdi-pin' : 'mdi-pin-outline') + ' mdi-rotate-45'"
                             size="36"
                             variant="text"
                             @click="mobile ? (pinned = false) : (pinned = !pinned)"
@@ -46,73 +50,85 @@
                 </v-list-item>
             </v-list>
 
-            <v-divider v-show="pinned || !mobile" />
+            <v-divider
+                v-show="pinned || !mobile"
+                color="dark"
+            />
 
-            <v-expand-transition>
-                <v-list
-                    v-show="pinned || !mobile"
-                    density="compact"
-                    nav
-                >
+            <v-list
+                bg-color="dark"
+                density="compact"
+                nav
+                rounded="lg"
+            >
+                <v-list-item
+                    v-for="(item, key) in defaultRoutes"
+                    :key="key"
+                    :prepend-icon="item.icon"
+                    :title="item.name"
+                    :to="item.to"
+                />
+                <v-list-group fluid>
+                    <template #activator="{ props, isOpen }">
+                        <v-list-item
+                            :active="route.path === '/websites' || route.name === 'Websites' || isOpen"
+                            density="compact"
+                            prepend-icon="mdi-web"
+                            title="Websites"
+                            :to="{ name: 'Websites' }"
+                        >
+                            <template #append>
+                                <v-btn
+                                    v-bind="props"
+                                    color="white"
+                                    density="comfortable"
+                                    :icon="isOpen ? 'mdi-minus' : 'mdi-chevron-down'"
+                                    size="small"
+                                    variant="tonal"
+                                    @click.stop.prevent
+                                />
+                            </template>
+                        </v-list-item>
+                    </template>
+
                     <v-list-item
-                        v-for="(item, key) in defaultRoutes"
+                        v-for="(item, key) in websites"
                         :key="key"
                         :prepend-icon="item.icon"
                         :title="item.name"
                         :to="item.to"
-                        @click="pinned = !mobile"
+                        :value="item.name"
                     />
-                    <v-list-group fluid>
-                        <template #activator="{ props, isOpen }">
-                            <v-list-item
-                                :active="route.path === '/websites' || route.name === 'Websites' || isOpen"
-                                density="compact"
-                                prepend-icon="mdi-web"
-                                title="Websites"
-                                :to="{ name: 'Websites' }"
-                                @click="pinned = !mobile"
-                            >
-                                <template #append>
-                                    <v-btn
-                                        v-bind="props"
-                                        color="white"
-                                        density="comfortable"
-                                        :icon="isOpen ? 'mdi-minus' : 'mdi-chevron-down'"
-                                        size="small"
-                                        variant="tonal"
-                                        @click.stop.prevent
-                                    />
-                                </template>
-                            </v-list-item>
-                        </template>
-
-                        <v-list-item
-                            v-for="(item, key) in websites"
-                            :key="key"
-                            :prepend-icon="item.icon"
-                            :title="item.name"
-                            :to="item.to"
-                            :value="item.name"
-                            @click="pinned = !mobile"
-                        />
-                    </v-list-group>
-                </v-list>
-            </v-expand-transition>
+                </v-list-group>
+            </v-list>
         </v-navigation-drawer>
 
-        <v-main
-            :class="pinned && !mobile ? '' : 'px-0'"
-            style="min-height: 100svh"
+        <v-app-bar
+            v-if="mobile"
+            color="dark"
+            density="compact"
+            scroll-behavior="collapse"
         >
+            <v-btn
+                v-model="drawer"
+                block
+                :icon="drawer ? 'mdi-close' : 'mdi-menu'"
+                @click="drawer = !drawer"
+            />
+        </v-app-bar>
+
+        <v-main>
             <router-view v-slot="{ Component }">
                 <v-fade-transition mode="out-in">
-                    <keep-alive>
+                    <KeepAlive>
                         <component :is="Component" />
-                    </keep-alive>
+                    </KeepAlive>
                 </v-fade-transition>
             </router-view>
 
-            <Footer />
+            <v-footer :color="darkColor ? 'dark' : 'white'">
+                <Footer v-model:dark-color="darkColor" />
+            </v-footer>
         </v-main>
 
         <v-overlay
@@ -120,13 +136,7 @@
             class="d-flex justify-center align-center"
             eager
         >
-            <ProfileOverlay
-                @close="
-                    () => {
-                        showProfileOverlay = false;
-                    }
-                "
-            />
+            <ProfileOverlay @close="showProfileOverlay = false" />
         </v-overlay>
     </v-app>
 </template>
@@ -138,6 +148,8 @@
     import { computed, onMounted, ref, watch } from 'vue';
     import ProfileOverlay from './Layout/ProfileOverlay.vue';
     import { useDisplay } from 'vuetify';
+
+    const profileAvatar = computed(() => '/img/Timo.jpeg');
 
     const display = useDisplay();
     const mobile = computed(() => display.smAndDown.value);
@@ -151,6 +163,10 @@
     const websites = ref([]);
 
     const showProfileOverlay = ref(false);
+
+    const darkColor = ref(true);
+
+    const drawer = ref(false);
 
     const defaultRoutes = [
         {
@@ -175,9 +191,13 @@
         { immediate: true }
     );
 
-    watch(mobile, (value) => {
-        pinned.value = !value;
-    });
+    watch(
+        mobile,
+        (value) => {
+            drawer.value = !value;
+        },
+        { immediate: true }
+    );
 
     onMounted(() => {
         const websitesRoute = _.find(router.options.routes[0].children, (route) => route.name === 'Websites');
