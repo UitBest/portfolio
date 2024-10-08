@@ -1,11 +1,10 @@
 import { createVuetify } from 'vuetify';
 import * as components from 'vuetify/components';
-import { VNavigationDrawer } from 'vuetify/components';
 import * as directives from 'vuetify/directives';
 import { md3 } from 'vuetify/blueprints';
 
-const light = {
-    dark: false,
+const dark = {
+    dark: true,
     colors: {
         primary: '#62F7FE',
         secondary: '#090088',
@@ -24,22 +23,13 @@ const light = {
      */
 };
 
-const dark = {
-    dark: true,
-    // colors: {
-    //     primary: '',
-    //     secondary: '',
-    // },
-};
-
 export default createVuetify({
     blueprint: md3,
     components,
     directives,
     theme: {
-        defaultTheme: 'light',
+        defaultTheme: 'dark',
         themes: {
-            light,
             dark,
         },
     },
@@ -47,6 +37,8 @@ export default createVuetify({
         VSheet: {
             color: 'transparent',
         },
+        VLazy: {
+            transition: 'fade-transition',
+        },
     },
-    VNavigationDrawer,
 });

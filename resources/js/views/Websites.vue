@@ -1,5 +1,8 @@
 <template>
-    <div>
+    <v-container
+        class="pa-0"
+        fluid
+    >
         <v-parallax
             v-if="route.meta.isRoot"
             src="/img/WebsitesBackground.jpg"
@@ -34,6 +37,7 @@
                                 aspect-ratio="1.3"
                                 class="rounded-lg my-4 elevation-24"
                                 cover
+                                eager
                                 position="top"
                                 :src="site.imgUrl"
                             />
@@ -107,7 +111,7 @@
                 @load="site.loaded.value = true"
             />
         </template>
-    </div>
+    </v-container>
 </template>
 
 <script setup>

@@ -1,453 +1,160 @@
 <template>
-    <div>
-        <v-parallax
-            scale="0.5"
-            src="/img/MainBackground.jpg"
+    <v-container
+        class="pa-0"
+        fluid
+    >
+        <v-lazy
+            id="homeContainer"
+            min-height="100svh"
         >
-            <!--        <div id="parallax1">-->
-            <!--        <v-parallax-->
-            <!--            id="bg1"-->
-            <!--        >-->
-            <!--        <template #placeholder>-->
-            <!--        <v-img-->
-            <!--            gradient="193deg, rgba(26,0,71,1) 0%, rgba(52,1,130,1) 25%, rgba(95,0,196,1) 50%, rgba(40,4,76,1) 50%, rgba(60,7,115,1) 75%, rgba(151,86,180,1) 75%, rgba(60,4,121,1) 100%"-->
-            <!--            height="100%"-->
-            <!--            position="fixed"-->
-            <!--            src="/"-->
-            <!--            style="top: -200px"-->
-            <!--        />-->
-            <!--        </template>-->
-            <v-sheet
-                class="d-flex align-center flex-wrap"
-                :class="mobile ? 'flex-column justify-center px-4 py-16' : 'flex-row justify-space-between pa-16'"
-                min-height="100svh"
-            >
+            <v-parallax src="/img/MainBackground.jpg">
                 <v-sheet
-                    class="d-flex justify-center flex-column align-center"
-                    width="100%"
+                    class="d-flex align-center flex-wrap"
+                    :class="mobile ? 'flex-column justify-center px-4 py-16' : 'flex-row justify-space-between pa-16'"
+                    min-height="100svh"
                 >
-                    <v-responsive
-                        class="rounded-circle elevation-24 d-flex justify-center align-center mb-16"
-                        height="400"
-                        width="400"
+                    <v-sheet
+                        class="d-flex justify-center flex-column align-center"
+                        width="100%"
                     >
-                        <v-img
-                            eager
-                            src="/img/TimoCutOutLower.png"
-                            style="backdrop-filter: blur(20px)"
-                        />
-                    </v-responsive>
-
-                    <div :class="mobile ? 'text-h3' : 'text-h2'">Timo Cuijpers</div>
-
-                    <v-btn
-                        v-if="arrowDownHint"
-                        class="mt-16 arrowDownHint"
-                        icon="mdi-arrow-down"
-                        variant="text"
-                        @click="scrollToBio"
-                    />
-                </v-sheet>
-
-                <v-sheet
-                    class="d-flex justify-center"
-                    height="50svh"
-                    width="100%"
-                />
-
-                <v-sheet
-                    :class="[showExtraIntroInfo ? 'mb-16' : '', mobile ? 'mb-16' : 'pr-8']"
-                    :width="mobile ? '100%' : '50%'"
-                >
-                    <v-card
-                        class="d-flex align-center position-relative justify-center"
-                        :class="showExtraIntroInfo && 'pb-16'"
-                        color="transparent"
-                        elevation="24"
-                        :min-height="!mobile ? 300 : undefined"
-                        style="backdrop-filter: blur(20px)"
-                    >
-                        <v-sheet>
-                            <v-card-title
-                                id="Bio"
-                                class="text-primary"
-                            >
-                                Bio
-                            </v-card-title>
-                            <v-card-text class="pb-0">
-                                <div class="text-caption text-primary">OVER MIJ</div>
-                                <div>Welkom op mijn portfolio website.</div>
-                                <br />
-                                <div>Ik ben Timo Cuijpers, geboren en getogen in Best.</div>
-                                <br />
-                                <div>
-                                    Tijdens mijn afstudeerstage bij "WEAP" ontstond er een enorme persoonlijke en
-                                    professionele groei. Deze ontwikkeling was te danken aan de professionele
-                                    werkomgeving en het aanleren van verantwoordelijkheidsgevoel.
-                                </div>
-                                <br />
-
-                                <v-expand-transition>
-                                    <v-sheet v-show="showExtraIntroInfo">
-                                        <v-divider /><br />
-                                        <div class="text-caption text-primary">STUDIE</div>
-                                        <div>
-                                            In 2020 vond er een overgang plaats van het Kempenhorst College in Oirschot
-                                            naar het Summa College in Eindhoven. Aanvankelijk was de inschrijving voor de
-                                            opleiding Expert IT, maar binnen een half jaar werd duidelijk dat een grotere
-                                            interesse lag bij programmeren.
-                                        </div>
-                                        <br />
-                                        <div>
-                                            Deze nieuwe inzichten leidden tot een overstap naar de opleiding 'Software
-                                            Developer', die begin 2024 succesvol werd afgerond.
-                                        </div>
-                                        <br />
-                                        <v-divider /><br />
-                                        <div class="text-caption text-primary">EIGEN BEDRIJF</div>
-                                        <div>
-                                            Na het versneld afronden van de opleiding en een leerzame stageperiode, werd
-                                            de stap gezet om een eigen onderneming, 'Uit Best', op te richten. Deze kans
-                                            deed zich voor in een kamer van
-                                            <a
-                                                class="text-white"
-                                                href="https://www.dieder.it/"
-                                                target="_blank"
-                                                >mijn vaders bedrijf</a
-                                            >. Dankbaarheid wordt uitgesproken voor de mogelijkheid en de waardevolle
-                                            adviezen over het runnen van een eigen bedrijf.
-                                        </div>
-                                        <br />
-                                        <div>
-                                            De eindstage bood essentiële inzichten en het vertrouwen dat het starten van
-                                            een eigen bedrijf een haalbare droom is.
-                                        </div>
-                                    </v-sheet>
-                                </v-expand-transition>
-                            </v-card-text>
-                        </v-sheet>
-
-                        <v-card-actions class="position-absolute bottom-0">
-                            <v-btn
-                                :icon="(showExtraIntroInfo ? 'mdi-rotate-180' : '') + ' mdi-chevron-down'"
-                                variant="text"
-                                @click="showExtraIntroInfo = !showExtraIntroInfo"
-                            />
-                        </v-card-actions>
-                    </v-card>
-                </v-sheet>
-                <v-sheet
-                    :class="!mobile && 'pl-8'"
-                    :height="!mobile ? '100%' : undefined"
-                    :width="mobile ? '100%' : '50%'"
-                >
-                    <v-card
-                        class="d-flex align-center position-relative justify-center"
-                        color="transparent"
-                        elevation="24"
-                        height="100%"
-                        :min-height="!mobile ? 300 : undefined"
-                        style="backdrop-filter: blur(20px)"
-                    >
-                        <v-sheet>
-                            <v-card-title class="text-primary"> Hobby's </v-card-title>
-                            <v-card-text>
-                                <div class="text-caption text-primary">GITAAR</div>
-                                <span>
-                                    Tijdens de stage bij "WEAP" ontstond de gelegenheid om een gitaar te lenen. Dit
-                                    leidde tot een groeiende interesse in het spelen van simpele akoestische nummers.
-                                </span>
-                                <br />
-                                <br />
-
-                                <div class="text-caption text-primary">BASKETBAL</div>
-                                <span>
-                                    Basketbal, gestart in 2016, is uitgegroeid tot een belangrijke activiteit, met BCO
-                                    Oirschot als de gekozen club voor training en wedstrijden. Deze sport biedt niet
-                                    alleen een manier om fysiek actief te zijn, maar ook een platform voor persoonlijke
-                                    ontwikkeling.
-                                </span>
-                            </v-card-text>
-                        </v-sheet>
-                    </v-card>
-                </v-sheet>
-            </v-sheet>
-        </v-parallax>
-        <v-sheet
-            class="justify-center w-100 d-flex flex-column"
-            :class="mobile ? 'px-4 py-10' : 'pa-10'"
-            color="dark"
-        >
-            <v-btn
-                class="mx-auto"
-                icon="mdi-trophy-outline"
-                variant="tonal"
-            />
-
-            <v-sheet
-                class="d-flex justify-lg-space-evenly"
-                :class="mobile && 'flex-column'"
-            >
-                <v-card
-                    class="mt-4 w-100"
-                    color="transparent"
-                    max-width="800"
-                >
-                    <template #title>
-                        <div class="text-primary text-center">PRO'S</div>
-                    </template>
-                    <v-card-text>
-                        <v-expansion-panels
-                            class="my-4 rounded-lg"
-                            color="background"
+                        <v-responsive
+                            class="rounded-circle elevation-24 d-flex justify-center align-center mb-16"
+                            height="400"
+                            width="400"
                         >
-                            <v-expansion-panel
-                                v-for="(quality, key) in qualities"
-                                :key="key"
-                                bg-color="background"
-                                collapse-icon="mdi-minus"
-                                color="background"
-                                rounded="lg"
-                                title="Klantinteractie"
-                            >
-                                <template #title>
-                                    <v-card
-                                        class="d-flex align-center"
-                                        color="transparent"
-                                        density="compact"
-                                        variant="flat"
-                                    >
-                                        <v-avatar
-                                            class="mr-4 text-white"
-                                            :icon="quality.icon"
-                                        />
-                                        <v-card-title class="pa-0 mt-1">
-                                            {{ quality.title }}
-                                        </v-card-title>
-                                    </v-card>
-                                </template>
-                                <template #text>
-                                    <v-sheet class="py-4">
-                                        <div class="text-body-1">
-                                            {{ quality.subtitle }}
-                                        </div>
-                                        <v-divider class="my-4" />
-                                        <div class="text-body-2">
-                                            {{ quality.description }}
-                                        </div>
-                                    </v-sheet>
-                                </template>
-                            </v-expansion-panel>
-                        </v-expansion-panels>
-                    </v-card-text>
-                </v-card>
-            </v-sheet>
-        </v-sheet>
-        <v-parallax
-            src="/img/MainBackground2.jpg"
+                            <v-img
+                                eager
+                                rounded="circle"
+                                src="/img/TimoCutOutLower.png"
+                                style="backdrop-filter: blur(20px)"
+                            />
+                        </v-responsive>
+
+                        <div :class="mobile ? 'text-h3' : 'text-h2'">Timo Cuijpers</div>
+
+                        <v-btn
+                            v-if="arrowDownHint"
+                            class="mt-16 arrowDownHint"
+                            icon="mdi-arrow-down"
+                            variant="text"
+                            @click="scrollToBio"
+                        />
+                    </v-sheet>
+
+                    <v-sheet
+                        class="d-flex justify-center"
+                        height="50svh"
+                        width="100%"
+                    />
+
+                    <v-lazy :width="mobile ? '100%' : '50%'">
+                        <Bio />
+                    </v-lazy>
+
+                    <v-lazy
+                        :class="!mobile && 'pl-8'"
+                        :height="!mobile ? '100%' : undefined"
+                        :width="mobile ? '100%' : '50%'"
+                    >
+                        <Hobbies />
+                    </v-lazy>
+                </v-sheet>
+            </v-parallax>
+        </v-lazy>
+
+        <v-lazy
+            min-height="300"
             width="100%"
         >
-            <v-sheet
-                :class="mobile ? 'px-4 py-16' : 'pa-16 mx-auto'"
-                max-width="2000"
-                :min-height="mobile ? '1000' : '100svh'"
-                width="100%"
-            >
-                <div class="text-center text-h2 text-primary mb-6">Uit Best</div>
+            <Pros :qualities="qualities" />
+        </v-lazy>
 
-                <div class="text-center text-body text-disabled mb-16">*Milestones*</div>
-                <v-timeline
-                    align="start"
-                    :density="mobile ? 'compact' : undefined"
-                    :justify="mobile ? undefined : 'center'"
-                    line-color="primary"
-                    line-inset="16"
-                    :side="mobile ? 'end' : undefined"
-                    truncate-line="both"
-                >
-                    <v-timeline-item
-                        v-for="(milestone, key) in milestones"
-                        :key="key"
-                        dot-color="white"
-                        fill-dot
-                        size="x-small"
-                        width="100%"
-                    >
-                        <v-card
-                            color="transparent"
-                            elevation="20"
-                            style="backdrop-filter: blur(20px)"
-                            :subtitle="milestone.period"
-                            :title="milestone.title"
+        <v-lazy
+            min-height="300svh"
+            width="100%"
+        >
+            <v-parallax src="/img/MainBackground2.jpg">
+                <v-container>
+                    <v-row justify="center">
+                        <div class="text-center text-h2 text-primary my-6">Carrière</div>
+                    </v-row>
+                    <v-row justify="center">
+                        <div class="text-center text-body text-disabled mb-16">2016</div>
+                    </v-row>
+                    <v-row justify="center">
+                        <v-timeline
+                            align="start"
+                            class="mb-16"
+                            :class="!mobile && 'ml-n8'"
+                            :density="mobile ? 'compact' : undefined"
+                            dot-color="primary"
+                            :justify="mobile ? undefined : 'center'"
+                            line-color="primary"
+                            line-inset="16"
+                            :side="mobile ? 'end' : undefined"
                         >
-                            <v-card-text>
-                                <div class="font-weight-black text-h6 text-primary">
-                                    {{ milestone.function }}
-                                </div>
+                            <v-timeline-item
+                                v-for="(job, key) in jobs"
+                                :key="key"
+                                width="100%"
+                            >
+                                <MilestoneItem2 :job="job" />
+                            </v-timeline-item>
+                        </v-timeline>
+                    </v-row>
+                    <v-divider class="my-16" />
 
-                                <v-expansion-panels
-                                    v-if="milestone.expansionPanels?.length > 0"
-                                    v-model="activePanels"
-                                    bg-color="transparent"
-                                    color="transparent"
-                                >
-                                    <v-expansion-panel
-                                        v-for="(item, descriptionKey) in milestone.expansionPanels"
-                                        :key="descriptionKey"
-                                        bg-color="transparent"
-                                        class="newsSelection"
-                                        collapse-icon="mdi-minus"
-                                        color="background"
-                                        eager
-                                        elevation="0"
-                                        rounded="lg"
-                                    >
-                                        <v-expansion-panel-title>
-                                            <v-card
-                                                class="d-flex align-center"
-                                                color="transparent"
-                                                density="compact"
-                                                variant="flat"
-                                            >
-                                                <v-avatar
-                                                    class="mr-4 text-white"
-                                                    :icon="item.icon"
-                                                />
-                                                <v-card-title class="pa-0 mt-1">
-                                                    {{ item.title }}
-                                                </v-card-title>
-                                            </v-card>
-                                        </v-expansion-panel-title>
-                                        <v-expansion-panel-text> </v-expansion-panel-text>
-                                    </v-expansion-panel>
-                                </v-expansion-panels>
+                    <v-row justify="center">
+                        <div class="text-center text-h2 text-primary mb-6">Uit Best</div>
+                    </v-row>
 
-                                <v-list v-else-if="milestone.description?.length > 0">
-                                    <v-list-item
-                                        v-for="(description, descriptionKey) in milestone.description"
-                                        :key="descriptionKey"
-                                        color="transparent"
-                                        variant="text"
-                                    >
-                                        - {{ description }}
-                                    </v-list-item>
-                                </v-list>
+                    <v-row justify="center">
+                        <div class="text-center text-body text-disabled mb-16">*Milestones*</div>
+                    </v-row>
 
-                                <v-menu
-                                    v-else-if="milestone.iframe"
-                                    eager
-                                    origin="auto"
-                                    width="100%"
-                                >
-                                    <template #activator="{ props }">
-                                        <v-img
-                                            v-bind="props"
-                                            aspect-ratio="1.30"
-                                            class="cursor-pointer"
-                                            cover
-                                            :eager="true"
-                                            :lazy-src="milestone.iframe.image"
-                                            rounded="lg"
-                                            :src="milestone.iframe.image"
-                                        />
-
-                                        <v-card-title class="text-wrap">
-                                            {{ milestone.iframe.title }}
-                                        </v-card-title>
-                                        <v-divider />
-
-                                        <v-card-text>
-                                            {{ milestone.iframe.subtitle }}
-                                        </v-card-text>
-                                    </template>
-
-                                    <v-card
-                                        class="text-decoration-underline"
-                                        color="background"
-                                        density="compact"
-                                        :href="milestone.iframe.link"
-                                        :text="milestone.iframe.link"
-                                        variant="flat"
-                                    />
-                                </v-menu>
-                            </v-card-text>
-                        </v-card>
-                    </v-timeline-item>
-                </v-timeline>
-
-                <v-divider class="my-16" />
-
-                <div class="text-center text-h2 text-primary my-16">Carrière</div>
-
-                <v-timeline
-                    align="start"
-                    class="mb-16"
-                    :density="mobile ? 'compact' : undefined"
-                    :justify="mobile ? undefined : 'center'"
-                    line-color="primary"
-                    line-inset="16"
-                    :side="mobile ? 'end' : undefined"
-                    truncate-line="both"
-                >
-                    <v-timeline-item
-                        v-for="(job, key) in jobs"
-                        :key="key"
-                        dot-color="white"
-                        fill-dot
-                        size="x-small"
-                        width="100%"
-                    >
-                        <v-card
-                            color="transparent"
-                            elevation="20"
-                            style="backdrop-filter: blur(20px)"
-                            :subtitle="job.period"
-                            :title="job.company"
+                    <v-row justify="center">
+                        <v-timeline
+                            align="start"
+                            class="mb-16"
+                            :class="!mobile && 'ml-n8'"
+                            :density="mobile ? 'compact' : undefined"
+                            dot-color="primary"
+                            :justify="mobile ? undefined : 'center'"
+                            line-color="primary"
+                            line-inset="16"
+                            :side="mobile ? 'end' : undefined"
                         >
-                            <v-card-text>
-                                <div class="font-weight-black text-h6 text-primary">
-                                    {{ job.function }}
-                                </div>
-                                <div>
-                                    <v-list
-                                        bg-color="transparent"
-                                        color="transparent"
-                                        variant="text"
-                                    >
-                                        <v-list-item
-                                            v-for="(description, descriptionKey) in job.description"
-                                            :key="descriptionKey"
-                                            color="transparent"
-                                            variant="text"
-                                        >
-                                            - {{ description }}
-                                        </v-list-item>
-                                    </v-list>
-                                </div>
-                            </v-card-text>
-                        </v-card>
-                    </v-timeline-item>
-                </v-timeline>
-            </v-sheet>
-        </v-parallax>
-    </div>
+                            <v-timeline-item
+                                v-for="(milestone, key) in milestones"
+                                :key="key"
+                                width="100%"
+                            >
+                                <MilestoneItem :milestone="milestone" />
+                            </v-timeline-item>
+                        </v-timeline>
+                    </v-row>
+                </v-container>
+            </v-parallax>
+        </v-lazy>
+    </v-container>
 </template>
 
 <script setup>
     import { computed, ref } from 'vue';
     import { useDisplay } from 'vuetify';
     import { useRouter } from 'vue-router';
+    import MilestoneItem from './MilestoneItem.vue';
+    import MilestoneItem2 from './MilestoneItem2.vue';
+    import Pros from './Pros.vue';
+    import Hobbies from './Hobbies.vue';
+    import Bio from './Bio.vue';
 
     const router = useRouter();
-
-    const gradient1 = ref(null);
 
     const display = useDisplay();
     const mobile = computed(() => display.smAndDown.value);
 
     const showExtraIntroInfo = ref(false);
-
-    const activePanels = ref([0]);
 
     const arrowDownHint = ref(true);
 
@@ -474,13 +181,14 @@
 
     const milestones = [
         {
-            title: 'Lancering Dieder.IT Website',
-            period: 'September 2024',
+            title: 'Summa College - Nieuws',
+            period: 'Maart 2024',
             iframe: {
-                image: '/img/diederit-preview.png',
-                title: 'Dieder.IT website opknappen',
-                subtitle: 'Moderniseren van out-dated website.',
-                link: 'https://diederit.uit-best.nl/',
+                image: '/img/TimoNieuws.jpg',
+                title: 'Timo is al ondernemer in de ICT',
+                subtitle:
+                    'Hij heeft zijn diploma nog niet eens officieel ontvangen, maar heeft al wel zijn eerste stappen gezet als ondernemer – de eerste facturen zijn inmiddels de deur uit.',
+                link: 'https://www.summacollege.nl/over-summa/nieuws/timo-is-al-ondernemer-in-de-ict',
             },
         },
         {
@@ -494,49 +202,58 @@
             },
         },
         {
-            title: 'Summa College - Nieuws',
-            period: 'Maart 2024',
+            title: 'Lancering Dieder.IT Website',
+            period: 'September 2024',
             iframe: {
-                image: '/img/TimoNieuws.jpg',
-                title: 'Timo is al ondernemer in de ICT',
-                subtitle:
-                    'Hij heeft zijn diploma nog niet eens officieel ontvangen, maar heeft al wel zijn eerste stappen gezet als ondernemer – de eerste facturen zijn inmiddels de deur uit.',
-                link: 'https://www.summacollege.nl/over-summa/nieuws/timo-is-al-ondernemer-in-de-ict',
+                image: '/img/diederit-preview.png',
+                title: 'Dieder.IT website opknappen',
+                subtitle: 'Moderniseren van out-dated website.',
+                link: 'https://diederit.uit-best.nl/',
             },
         },
     ];
 
     const jobs = [
         {
-            company: 'Uit Best (Best)',
-            period: 'Januari 2024 - heden',
-            function: 'Eigenaar',
+            company: 'Kempenhorst College (Oirschot)',
+            period: 'augustus 2016 - mei 2020',
+            function: 'VMBO-T / MAVO',
+            description: ['Technisch keuzedeel'],
+        },
+        {
+            company: 'Axender (Best)',
+            period: 'februari 2017 - juni 2018',
+            function: 'Folderbezorger',
+            description: ['Folders insteken en daarna in de wijk bezorgen'],
+        },
+        {
+            company: 'Dieder.IT (Best)',
+            period: 'april 2020 - augustus 2020',
+            function: 'Stagiair',
+            description: ['Basis kennis IT leren', 'Voorbereiding Summa College Expert IT'],
+        },
+        {
+            company: 'MAJO Diensten (Eindhoven)',
+            period: 'april 2020 - augustus 2020',
+            function: 'Schoonmaker',
             description: [
-                'Designen en ontwerpen van websites',
-                'Interviews afnemen',
-                'Front-end van web-applicaties bouwen',
-                'Websites bouwen',
-                'Administratie',
+                'Hervullen papieren handdoeken',
+                'Stofzuigen',
+                'Dweilen',
+                'Prullenbakken verschonen',
+                'Toiletten schoonmaken',
+                'Tafels & stoelen desinfecteren',
             ],
         },
         {
-            company: 'WEAP (Gemert)',
-            period: 'september 2023 - januari 2024',
-            function: 'Stagiair',
-            description: ['Ontwikkelen van een stand-up tool voor intern gebruik'],
-        },
-        {
             company: 'Summa College IT (Eindhoven)',
-            period: 'april 2021 - januari 2024',
-            function: 'Software Developer (MBO Niveau 4)',
+            period: 'augustus 2020 - april 2021',
+            function: 'Expert IT (MBO Niveau 4)',
             description: [
-                'Versneld traject (differentiatie klas)',
-                'Applicaties schrijven in Laravel',
-                'Klanten interactie',
-                'Open dagen meehelpen',
-                'Master klassen meehelpen',
-                'Dronechallenge (niet afgerond)',
-                '2 Hackathons',
+                'Servers beheren',
+                'Applicaties beheren',
+                'Office 365 beheren',
+                'Gestopt wegens interesse in andere opleiding',
             ],
         },
         {
@@ -554,52 +271,42 @@
         },
         {
             company: 'Summa College IT (Eindhoven)',
-            period: 'augustus 2020 - april 2021',
-            function: 'Expert IT (MBO Niveau 4)',
+            period: 'april 2021 - januari 2024',
+            function: 'Software Developer (MBO Niveau 4)',
             description: [
-                'Servers beheren',
-                'Applicaties beheren',
-                'Office 365 beheren',
-                'Gestopt wegens interesse in andere opleiding',
+                'Versneld traject (differentiatie klas)',
+                'Applicaties schrijven in Laravel',
+                'Klanten interactie',
+                'Open dagen meehelpen',
+                'Master klassen meehelpen',
+                'Drone-challenge (niet afgerond)',
+                '2 Hackathons',
             ],
         },
         {
-            company: 'MAJO Diensten (Eindhoven)',
-            period: 'april 2020 - augustus 2020',
-            function: 'Schoonmaker',
-            description: [
-                'Hervullen papieren handdoeken',
-                'Stofzuigen',
-                'Dweilen',
-                'Prullenbakken verschonen',
-                'Toiletten schoonmaken',
-                'Tafels & stoelen desinfecteren',
-            ],
-        },
-        {
-            company: 'Dieder.IT (Best)',
-            period: 'april 2020 - augustus 2020',
+            company: 'WEAP (Gemert)',
+            period: 'september 2023 - januari 2024',
             function: 'Stagiair',
-            description: ['Basis kennis IT leren', 'Voorbereiding Summa College Expert IT'],
+            description: ['Ontwikkelen van een stand-up tool voor intern gebruik'],
         },
         {
-            company: 'Axender (Best)',
-            period: 'februari 2017 - juni 2018',
-            function: 'Folderbezorger',
-            description: ['Folders insteken en daarna in de wijk bezorgen'],
-        },
-        {
-            company: 'Kempenhorst College (Oirschot)',
-            period: 'augustus 2016 - mei 2020',
-            function: 'VMBO-T / MAVO',
-            description: ['Technisch keuzendeel'],
+            company: 'Uit Best (Best)',
+            period: 'Januari 2024 - heden',
+            function: 'Eigenaar',
+            description: [
+                'Designen en ontwerpen van websites',
+                'Interviews afnemen',
+                'Front-end van web-applicaties bouwen',
+                'Websites bouwen',
+                'Administratie',
+            ],
         },
     ];
 </script>
 
 <style>
 
-body {
+#homeContainer {
 
     transform-style: preserve-3d;
     overflow-y: auto;
