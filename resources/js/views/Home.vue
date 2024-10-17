@@ -3,6 +3,13 @@
         class="pa-0"
         fluid
     >
+        <v-sheet v-show="false">
+            <h1>Portfolio Timo Cuijpers</h1>
+            <h2>
+                Dit is een portfolio van Timo Cuijpers. Hierin staan alle projecten die hij heeft gemaakt en waar hij aan
+                heeft gewerkt. Ook staan er persoonlijke gegevens in en een korte biografie.
+            </h2>
+        </v-sheet>
         <v-lazy
             id="homeContainer"
             min-height="100svh"
@@ -76,10 +83,10 @@
             <v-parallax src="/img/MainBackground2.jpg">
                 <v-container>
                     <v-row justify="center">
-                        <div class="text-center text-h2 text-primary my-6">Carrière</div>
+                        <h3 class="text-center text-h2 text-primary my-6">Carrière</h3>
                     </v-row>
                     <v-row justify="center">
-                        <div class="text-center text-body text-disabled mb-16">2016</div>
+                        <h4 class="text-center text-body text-disabled mb-16">2016</h4>
                     </v-row>
                     <v-row justify="center">
                         <v-timeline
@@ -102,10 +109,11 @@
                             </v-timeline-item>
                         </v-timeline>
                     </v-row>
+
                     <v-divider class="my-16" />
 
                     <v-row justify="center">
-                        <div class="text-center text-h2 text-primary mb-6">Uit Best</div>
+                        <div class="mt-16 text-center text-h2 text-primary mb-6">Uit Best</div>
                     </v-row>
 
                     <v-row justify="center">
@@ -144,7 +152,7 @@
     import { useDisplay } from 'vuetify';
     import { useRouter } from 'vue-router';
     import MilestoneItem from './MilestoneItem.vue';
-    import MilestoneItem2 from './MilestoneItem2.vue';
+    import MilestoneItem2 from './CareerItem.vue';
     import Pros from './Pros.vue';
     import Hobbies from './Hobbies.vue';
     import Bio from './Bio.vue';
@@ -183,33 +191,29 @@
         {
             title: 'Summa College - Nieuws',
             period: 'Maart 2024',
-            iframe: {
-                image: '/img/TimoNieuws.jpg',
-                title: 'Timo is al ondernemer in de ICT',
-                subtitle:
-                    'Hij heeft zijn diploma nog niet eens officieel ontvangen, maar heeft al wel zijn eerste stappen gezet als ondernemer – de eerste facturen zijn inmiddels de deur uit.',
-                link: 'https://www.summacollege.nl/over-summa/nieuws/timo-is-al-ondernemer-in-de-ict',
-            },
+            image: '/img/TimoNieuws.jpg',
+            link: 'https://www.summacollege.nl/over-summa/nieuws/timo-is-al-ondernemer-in-de-ict',
         },
         {
-            title: 'Lancering Appeldoorn Website',
+            title: 'Appeldoorn Riooltechniek',
             period: 'Augustus 2024',
-            iframe: {
-                image: '/img/appeldoorn-riooltechniek-preview.png',
-                title: 'Herbouwen Appeldoorn Riooltechniek Website ',
-                subtitle: 'Overzetten website van Wordpress naar programmering',
-                link: 'https://appeldoorn-riooltechniek.nl/',
-            },
+            image: '/img/appeldoorn-riooltechniek-preview.png',
+            subtitle: 'Wordpress to Vue',
+            to: { name: 'Appeldoorn Riooltechniek - Archief' },
         },
         {
-            title: 'Lancering Dieder.IT Website',
+            title: 'Dieder.IT',
             period: 'September 2024',
-            iframe: {
-                image: '/img/diederit-preview.png',
-                title: 'Dieder.IT website opknappen',
-                subtitle: 'Moderniseren van out-dated website.',
-                link: 'https://diederit.uit-best.nl/',
-            },
+            image: '/img/diederit-preview.png',
+            subtitle: 'Modernisatie',
+            to: { name: 'DiederIT' },
+        },
+        {
+            title: 'Appeldoorn Riooltechniek 2',
+            period: 'Oktober 2024',
+            image: '/img/appeldoorn-riooltechniek-preview-nieuw.png',
+            subtitle: 'Redesign / Optimalisatie / SEO',
+            to: { name: 'Appeldoorn Riooltechniek - Archief' },
         },
     ];
 

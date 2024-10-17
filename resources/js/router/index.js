@@ -1,54 +1,48 @@
 import { createWebHistory, createRouter } from 'vue-router';
 import { ref } from 'vue';
 
+const Layout = () => import('@/js/layouts/Layout.vue');
+const Home = () => import('@/js/views/Home.vue');
+const UitBest = () => import('@/js/views/UitBest.vue');
+const Websites = () => import('@/js/views/Websites.vue');
+
 const routes = [
     {
         path: '',
         name: 'Layout',
-        component: () => import('@/js/layouts/Layout.vue'),
+        component: Layout,
         redirect: { name: 'Home' },
         children: [
             {
                 path: 'home',
                 name: 'Home',
-                component: () => import('@/js/views/Home.vue'),
+                component: Home,
                 meta: {
                     isRoot: true,
+                    title: 'Home',
                 },
             },
             {
                 path: 'uit-best',
                 name: 'Uit Best',
-                component: () => import('@/js/views/UitBest.vue'),
+                component: UitBest,
                 meta: {
                     isRoot: true,
+                    title: 'Uit Best',
                 },
             },
             {
                 path: 'websites',
                 name: 'Websites',
-                component: () => import('@/js/views/Websites.vue'),
+                component: Websites,
                 meta: {
                     isRoot: true,
                 },
                 children: [
                     {
-                        path: 'dieder-it',
-                        name: 'DiederIT',
-                        component: parent,
-                        meta: {
-                            isRoot: false,
-                            sidebar: {
-                                icon: 'mdi-laptop',
-                                name: 'Dieder.IT',
-                                to: { name: 'DiederIT' },
-                            },
-                        },
-                    },
-                    {
                         path: 'appeldoorn-riooltechniek',
                         name: 'Appeldoorn Riooltechniek',
-                        component: parent,
+                        component: Websites,
                         meta: {
                             isRoot: false,
                             sidebar: {
@@ -59,9 +53,38 @@ const routes = [
                         },
                     },
                     {
+                        path: 'dieder-it',
+                        name: 'DiederIT',
+                        component: Websites,
+                        meta: {
+                            isRoot: false,
+                            sidebar: {
+                                icon: 'mdi-laptop',
+                                name: 'Dieder.IT',
+                                to: { name: 'DiederIT' },
+                            },
+                        },
+                    },
+                    {
+                        path: 'dieder-it-archive',
+                        name: 'DiederIT - Archief',
+                        component: Websites,
+                        meta: {
+                            isRoot: false,
+                        },
+                    },
+                    {
+                        path: 'appeldoorn-riooltechniek-archive',
+                        name: 'Appeldoorn Riooltechniek - Archief',
+                        component: Websites,
+                        meta: {
+                            isRoot: false,
+                        },
+                    },
+                    {
                         path: '4torentjes',
                         name: '4 Torentjes',
-                        component: parent,
+                        component: Websites,
                         meta: {
                             isRoot: false,
                             sidebar: {
@@ -74,7 +97,7 @@ const routes = [
                     {
                         path: 'madje-diensten',
                         name: 'Madje Diensten',
-                        component: parent,
+                        component: Websites,
                         meta: {
                             isRoot: false,
                             sidebar: {
@@ -87,7 +110,7 @@ const routes = [
                     {
                         path: 'beauty-education',
                         name: 'Beauty Education',
-                        component: parent,
+                        component: Websites,
                         meta: {
                             isRoot: false,
                             sidebar: {

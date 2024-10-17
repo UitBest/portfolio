@@ -18,7 +18,15 @@ export default defineConfig({
         },
     },
     build: {
-        chunkSizeWarningLimit: 1024,
+        rollupOptions: {
+            output: {
+                manualChunks(id) {
+                    if (id.includes('node_modules')) {
+                        return 'vendor';
+                    }
+                },
+            },
+        },
     },
     plugins: [laravel(['resources/css/app.css', 'resources/js/app.js']), vue(), vuetify()],
 });

@@ -5,20 +5,11 @@
             close-delay="300"
             color="dark"
             expand-on-hover
+            :location="mobile ? 'top' : 'left'"
             :permanent="!mobile"
             :rail="!pinned && !mobile"
             :temporary="mobile"
         >
-            <!--                    <v-navigation-drawer-->
-            <!--                        :class="pinned && !mobile ? '' : 'rounded-lg ma-2'"-->
-            <!--                        :color="mobile ? 'black' : 'transparent'"-->
-            <!--                        :expand-on-hover="!mobile"-->
-            <!--                        :floating="mobile"-->
-            <!--                        :permanent="!mobile"-->
-            <!--                        :rail="!pinned"-->
-            <!--                        :sticky="!pinned || mobile"-->
-            <!--                        :temporary="mobile"-->
-            <!--                    >-->
             <v-list
                 bg-color="dark"
                 rounded="lg"
@@ -60,6 +51,7 @@
                 density="compact"
                 nav
                 rounded="lg"
+                slim
             >
                 <v-list-item
                     v-for="(item, key) in defaultRoutes"
@@ -68,38 +60,21 @@
                     :title="item.name"
                     :to="item.to"
                 />
-                <v-list-group fluid>
-                    <template #activator="{ props, isOpen }">
-                        <v-list-item
-                            :active="route.path === '/websites' || route.name === 'Websites' || isOpen"
-                            density="compact"
-                            prepend-icon="mdi-web"
-                            title="Websites"
-                            :to="{ name: 'Websites' }"
-                        >
-                            <template #append>
-                                <v-btn
-                                    v-bind="props"
-                                    color="white"
-                                    density="comfortable"
-                                    :icon="isOpen ? 'mdi-minus' : 'mdi-chevron-down'"
-                                    size="small"
-                                    variant="tonal"
-                                    @click.stop.prevent
-                                />
-                            </template>
-                        </v-list-item>
-                    </template>
 
-                    <v-list-item
-                        v-for="(item, key) in websites"
-                        :key="key"
-                        :prepend-icon="item.icon"
-                        :title="item.name"
-                        :to="item.to"
-                        :value="item.name"
-                    />
-                </v-list-group>
+                <v-divider />
+
+                <v-list-subheader class="w-100 d-flex justify-center font-weight-bold"> Websites </v-list-subheader>
+
+                <v-divider />
+
+                <v-list-item
+                    v-for="(item, key) in websites"
+                    :key="key"
+                    :prepend-icon="item.icon"
+                    :title="item.name"
+                    :to="item.to"
+                    :value="item.name"
+                />
             </v-list>
         </v-navigation-drawer>
 
@@ -148,6 +123,7 @@
     import { computed, onMounted, ref, watch } from 'vue';
     import ProfileOverlay from './Layout/ProfileOverlay.vue';
     import { useDisplay } from 'vuetify';
+    import { find } from 'lodash';
 
     const profileAvatar = computed(() => '/img/Timo.jpeg');
 
@@ -158,6 +134,7 @@
     const router = useRouter();
 
     const pinned = ref(!mobile.value);
+    const isOpened = ref(true);
 
     const showWebsites = ref(false);
     const websites = ref([]);
@@ -172,12 +149,17 @@
         {
             icon: 'mdi-home',
             name: 'Home',
-            to: '/home',
+            to: { name: 'Home' },
         },
         {
             icon: 'mdi-office-building',
             name: 'Uit Best',
-            to: '/uit-best',
+            to: { name: 'Uit Best' },
+        },
+        {
+            icon: 'mdi-web',
+            name: 'Website overzicht',
+            to: { name: 'Websites' },
         },
     ];
 
@@ -199,8 +181,12 @@
         { immediate: true }
     );
 
+    watch(isOpened, (val) => {
+        console.log(val);
+    });
+
     onMounted(() => {
-        const websitesRoute = _.find(router.options.routes[0].children, (route) => route.name === 'Websites');
+        const websitesRoute = find(router.options.routes[0].children, (route) => route.name === 'Websites');
 
         websitesRoute.children.forEach((website) => {
             if (website.meta?.sidebar) {

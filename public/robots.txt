@@ -1,2 +1,5 @@
 User-agent: *
-Disallow:
+Disallow: /websites/*
+Disallow: /uit-best
+
+Sitemap: https://timo.uit-best.nl/sitemap.xml
