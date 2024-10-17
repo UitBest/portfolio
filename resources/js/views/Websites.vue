@@ -131,7 +131,7 @@
                     height="46"
                     location="bottom right"
                     min-width="46"
-                    position="fixed"
+                    position="absolute"
                     :to="
                         site.archiveUrl
                             ? { name: site.name + ' - Archief' }
