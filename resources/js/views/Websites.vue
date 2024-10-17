@@ -1,6 +1,6 @@
 <template>
     <v-container
-        class="pa-0"
+        class="pa-0 position-relative"
         fluid
     >
         <v-parallax
@@ -19,7 +19,7 @@
                 max-width="2000"
             >
                 <v-sheet
-                    v-for="site in sites"
+                    v-for="site in sites.filter((site, key) => !!site.show)"
                     :key="site.name"
                     :class="mobile ? 'px-4 py-16' : 'pa-16'"
                     :width="mobile ? '100%' : '50%'"
@@ -32,6 +32,17 @@
                         :title="site.name"
                         :to="{ name: site.name }"
                     >
+                        <template
+                            v-if="site?.archiveUrl"
+                            #append
+                        >
+                            <v-btn
+                                append-icon="mdi-history"
+                                class="font-weight-bold"
+                                text="Archief"
+                                :to="{ name: site.name + ' - Archief' }"
+                            />
+                        </template>
                         <v-card-text>
                             <v-img
                                 aspect-ratio="1.3"
@@ -110,7 +121,52 @@
                 style="height: 100svh; width: 100%"
                 @load="site.loaded.value = true"
             />
+            <v-hover
+                v-if="route.name === site.name && (site?.archiveUrl || site?.originalUrl)"
+                v-slot="{ isHovering, props }"
+            >
+                <v-btn
+                    v-bind="props"
+                    class="ma-10"
+                    height="46"
+                    location="bottom right"
+                    min-width="46"
+                    position="fixed"
+                    :to="
+                        site.archiveUrl
+                            ? { name: site.name + ' - Archief' }
+                            : site.originalUrl
+                              ? { name: site.name.split(' - ')[0] }
+                              : { name: 'Home' }
+                    "
+                >
+                    <template #default>
+                        <v-expand-x-transition>
+                            <v-sheet v-show="isHovering">
+                                {{ site.archiveUrl ? 'Archief' : 'Vernieuwd' }}
+                            </v-sheet>
+                        </v-expand-x-transition>
+                        <v-icon
+                            :icon="site.archiveUrl ? 'mdi-history' : 'mdi-fast-forward-outline'"
+                            size="32"
+                        />
+                    </template>
+                </v-btn>
+            </v-hover>
         </template>
+
+        <v-sheet
+            v-if="route.name !== 'Websites'"
+            class="mb-10"
+            location="bottom center"
+            position="absolute"
+        >
+            <v-btn
+                height="46"
+                text="Alle websites bekijken"
+                :to="{ name: 'Websites' }"
+            />
+        </v-sheet>
     </v-container>
 </template>
 
@@ -126,8 +182,21 @@
 
     const sites = [
         {
+            show: true,
+            name: 'Appeldoorn Riooltechniek',
+            url: 'https://appeldoornriooltechniek.nl/',
+            archiveUrl: 'https://appeldoorn-archive.uit-best.nl/',
+            loaded: ref(false),
+            description: 'Website moest opnieuw ontworpen worden en geoptimaliseerd worden voor Google.',
+            duration: '22 uur',
+            when: 'Eind 2024',
+            imgUrl: '/img/appeldoorn-riooltechniek-preview-nieuw.png',
+        },
+        {
+            show: true,
             name: 'DiederIT',
-            url: 'https://dieder.it',
+            url: 'https://dieder.it/',
+            archiveUrl: 'https://diederit-archive.uit-best.nl/',
             loaded: ref(false),
             description: 'Originele website was outdated en moest een nieuw design krijgen.',
             duration: '16 uur (inclusief design, exclusief tekst)',
@@ -135,15 +204,7 @@
             imgUrl: '/img/diederit-preview.png',
         },
         {
-            name: 'Appeldoorn Riooltechniek',
-            url: 'https://appeldoorn-riooltechniek.nl',
-            loaded: ref(false),
-            description: 'Website moest overgezet worden van Wordpress naar geprogrammeerde website.',
-            duration: '18 uur (exclusief design, exclusief tekst)',
-            when: 'Midden 2024',
-            imgUrl: '/img/appeldoorn-riooltechniek-preview.png',
-        },
-        {
+            show: true,
             name: '4 Torentjes',
             url: 'https://www.4torentjes.nl',
             loaded: ref(false),
@@ -154,6 +215,7 @@
             imgUrl: '/img/4TorentjesCutOut.png',
         },
         {
+            show: true,
             name: 'Madje Diensten',
             url: 'https://www.madjediensten.nl',
             loaded: ref(false),
@@ -163,6 +225,7 @@
             imgUrl: '/img/MadjeDienstenCutOut.png',
         },
         {
+            show: true,
             name: 'Beauty Education',
             url: 'https://www.beautyeducation.nl',
             loaded: ref(false),
@@ -171,6 +234,31 @@
             duration: '90 uur per persoon (3 personen)',
             when: 'Eind 2022 - Midden 2023',
             imgUrl: '/img/BeautyEducationCutOut.png',
+        },
+
+        // Archive
+
+        {
+            name: 'DiederIT - Archief',
+            show: false,
+            url: 'https://diederit-archive.uit-best.nl/',
+            originalUrl: 'https://dieder.it/',
+            loaded: ref(false),
+            description: 'Originele website was outdated en moest een nieuw design krijgen.',
+            duration: '16 uur (inclusief design, exclusief tekst)',
+            when: 'Midden 2024',
+            imgUrl: '/img/diederit-preview.png',
+        },
+        {
+            name: 'Appeldoorn Riooltechniek - Archief',
+            show: false,
+            originalUrl: 'https://appeldoornriooltechniek.nl/',
+            url: 'https://appeldoorn-archive.uit-best.nl/',
+            loaded: ref(false),
+            description: 'Website moest overgezet worden van Wordpress naar geprogrammeerde website.',
+            duration: '18 uur (exclusief design, exclusief tekst)',
+            when: 'Midden 2024',
+            imgUrl: '/img/appeldoorn-riooltechniek-preview.png',
         },
     ];
 </script>
