@@ -37,6 +37,7 @@ const routes = [
                 component: Websites,
                 meta: {
                     isRoot: true,
+                    title: 'Websites',
                 },
                 children: [
                     {
@@ -45,6 +46,8 @@ const routes = [
                         component: Websites,
                         meta: {
                             isRoot: false,
+                            title: 'Appeldoorn Riooltechniek',
+                            url: 'https://appeldoornriooltechniek.nl/',
                             sidebar: {
                                 icon: 'mdi-toolbox',
                                 name: 'Appeldoorn Riooltechniek',
@@ -58,6 +61,7 @@ const routes = [
                         component: Websites,
                         meta: {
                             isRoot: false,
+                            title: 'Dieder.IT',
                             sidebar: {
                                 icon: 'mdi-laptop',
                                 name: 'Dieder.IT',
@@ -66,27 +70,12 @@ const routes = [
                         },
                     },
                     {
-                        path: 'dieder-it-archive',
-                        name: 'DiederIT - Archief',
-                        component: Websites,
-                        meta: {
-                            isRoot: false,
-                        },
-                    },
-                    {
-                        path: 'appeldoorn-riooltechniek-archive',
-                        name: 'Appeldoorn Riooltechniek - Archief',
-                        component: Websites,
-                        meta: {
-                            isRoot: false,
-                        },
-                    },
-                    {
                         path: '4torentjes',
                         name: '4 Torentjes',
                         component: Websites,
                         meta: {
                             isRoot: false,
+                            title: '4 Torentjes',
                             sidebar: {
                                 icon: 'mdi-weather-sunny',
                                 name: '4 Torentjes',
@@ -99,6 +88,7 @@ const routes = [
                         name: 'Madje Diensten',
                         component: Websites,
                         meta: {
+                            title: 'Madje Diensten',
                             isRoot: false,
                             sidebar: {
                                 icon: 'mdi-broom',
@@ -112,12 +102,34 @@ const routes = [
                         name: 'Beauty Education',
                         component: Websites,
                         meta: {
+                            title: 'Beauty Education',
                             isRoot: false,
                             sidebar: {
                                 icon: 'mdi-brush',
                                 name: 'Beauty Education',
                                 to: { name: 'Beauty Education' },
                             },
+                        },
+                    },
+
+                    // Archive
+
+                    {
+                        path: 'dieder-it-archive',
+                        name: 'DiederIT - Archief',
+                        component: Websites,
+                        meta: {
+                            isRoot: false,
+                            title: 'Dieder.IT - Archief',
+                        },
+                    },
+                    {
+                        path: 'appeldoorn-riooltechniek-archive',
+                        name: 'Appeldoorn Riooltechniek - Archief',
+                        component: Websites,
+                        meta: {
+                            isRoot: false,
+                            title: 'Appeldoorn Riooltechniek - Archief',
                         },
                     },
                 ],
