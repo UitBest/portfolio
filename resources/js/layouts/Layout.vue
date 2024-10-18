@@ -94,11 +94,9 @@
 
         <v-main>
             <router-view v-slot="{ Component }">
-                <v-fade-transition mode="out-in">
-                    <KeepAlive>
-                        <component :is="Component" />
-                    </KeepAlive>
-                </v-fade-transition>
+                <keep-alive>
+                    <component :is="Component" />
+                </keep-alive>
             </router-view>
 
             <v-footer :color="darkColor ? 'dark' : 'white'">
@@ -134,7 +132,6 @@
     const router = useRouter();
 
     const pinned = ref(!mobile.value);
-    const isOpened = ref(true);
 
     const showWebsites = ref(false);
     const websites = ref([]);
@@ -180,10 +177,6 @@
         },
         { immediate: true }
     );
-
-    watch(isOpened, (val) => {
-        console.log(val);
-    });
 
     onMounted(() => {
         const websitesRoute = find(router.options.routes[0].children, (route) => route.name === 'Websites');

@@ -48,23 +48,32 @@
                         />
                     </v-sheet>
 
-                    <v-sheet
-                        class="d-flex justify-center"
+                    <v-responsive
                         height="50svh"
                         width="100%"
                     />
 
-                    <v-lazy :width="mobile ? '100%' : '50%'">
-                        <Bio />
-                    </v-lazy>
+                    <v-container>
+                        <v-row>
+                            <v-col
+                                cols="12"
+                                md="6"
+                            >
+                                <v-lazy height="100%">
+                                    <Bio />
+                                </v-lazy>
+                            </v-col>
 
-                    <v-lazy
-                        :class="!mobile && 'pl-8'"
-                        :height="!mobile ? '100%' : undefined"
-                        :width="mobile ? '100%' : '50%'"
-                    >
-                        <Hobbies />
-                    </v-lazy>
+                            <v-col
+                                cols="12"
+                                md="6"
+                            >
+                                <v-lazy height="100%">
+                                    <Hobbies />
+                                </v-lazy>
+                            </v-col>
+                        </v-row>
+                    </v-container>
                 </v-sheet>
             </v-parallax>
         </v-lazy>
@@ -76,10 +85,7 @@
             <Pros :qualities="qualities" />
         </v-lazy>
 
-        <v-lazy
-            min-height="300svh"
-            width="100%"
-        >
+        <v-lazy width="100%">
             <v-parallax src="/img/MainBackground2.jpg">
                 <v-container>
                     <v-row justify="center">
@@ -91,7 +97,7 @@
                     <v-row justify="center">
                         <v-timeline
                             align="start"
-                            class="mb-16"
+                            class="mb-16 w-100"
                             :class="!mobile && 'ml-n8'"
                             :density="mobile ? 'compact' : undefined"
                             dot-color="primary"
@@ -123,7 +129,7 @@
                     <v-row justify="center">
                         <v-timeline
                             align="start"
-                            class="mb-16"
+                            class="mb-16 w-100"
                             :class="!mobile && 'ml-n8'"
                             :density="mobile ? 'compact' : undefined"
                             dot-color="primary"
